@@ -1,6 +1,6 @@
 <mxfile>
     <diagram id="ybiLL1LyiXlMmaEEbldK" name="Lavar Plato">
-        <mxGraphModel dx="1186" dy="777" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="876" dy="717" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -84,7 +84,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="4sGhamAMQNWe3JGEpkl_" name="Ir de Compras">
-        <mxGraphModel dx="1186" dy="777" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="876" dy="717" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="zolJmmEE2IEfudClGi2Z-0"/>
                 <mxCell id="zolJmmEE2IEfudClGi2Z-1" parent="zolJmmEE2IEfudClGi2Z-0"/>
@@ -196,7 +196,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="bUQ-QYsnWEWD_Fu1O9YL" name="Cenar">
-        <mxGraphModel dx="1186" dy="777" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="876" dy="717" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="R4NFcXQ2LhQOvEd5bFvi-0"/>
                 <mxCell id="R4NFcXQ2LhQOvEd5bFvi-1" parent="R4NFcXQ2LhQOvEd5bFvi-0"/>
