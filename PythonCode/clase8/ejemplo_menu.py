@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-
+#python3 -m pip install simple-term-menu
+#pip install simple-term-menu
 from simple_term_menu import TerminalMenu
 
 
