@@ -1,5 +1,9 @@
 import os
 from simple_term_menu import TerminalMenu
+import vehiculo as base_datos
+
+
+vehiculos_por_hora = base_datos.vehiculos['vehiculos_espacio_mensual'][:]
 
 ##
 # Limpia la consola de Windows y MAC OS.
@@ -42,15 +46,15 @@ def menu_principal():
 ##
 def ver_todos_vehiculos():
     menu_cabecera()
-    vehiculos_espacio_mensual = vehiculos["vehiculos_espacio_mensual"]
-    vehiculos_por_hora = vehiculos["vehiculos_por_hora"]
+    # vehiculos_espacio_mensual = base_datos.vehiculos["vehiculos_espacio_mensual"]
+    # vehiculos_por_hora = base_datos.vehiculos["vehiculos_por_hora"]
     print(f"Lista de todos los vehiculos: \n")
     
-    for vehiculo in vehiculos_espacio_mensual:
-        print(f"Marca: {vehiculo['marca']}")
-        print(f"Estilo: {vehiculo['estilo']}")
-        print(f"Modelo: {vehiculo['modelo']}")
-        print(f"Placa: {vehiculo['placa']} \n")
+    # for vehiculo in vehiculos_espacio_mensual:
+    #     print(f"Marca: {vehiculo['marca']}")
+    #     print(f"Estilo: {vehiculo['estilo']}")
+    #     print(f"Modelo: {vehiculo['modelo']}")
+    #     print(f"Placa: {vehiculo['placa']} \n")
   
     for vehiculo in vehiculos_por_hora:
         print(f"Marca: {vehiculo['marca']}")
@@ -65,7 +69,7 @@ def ver_todos_vehiculos():
 ##     
 def ver_vehiculos_espacio_mensual():
     menu_cabecera()
-    vehiculos_espacio_mensual = vehiculos["vehiculos_espacio_mensual"]
+    vehiculos_espacio_mensual = base_datos.vehiculos["vehiculos_espacio_mensual"]
     print(f"Lista de vehiculos con espacio mensual: \n")
     
     for vehiculo in vehiculos_espacio_mensual:
@@ -111,9 +115,9 @@ def registrar_vehiculo():
             }
 
         if tipo_tarifa == 0:
-            vehiculos["vehiculos_espacio_mensual"].append(vehiculo)
+            base_datos.vehiculos["vehiculos_espacio_mensual"].append(vehiculo)
         if tipo_tarifa == 1:
-            vehiculos["vehiculos_por_hora"].append(vehiculo)
+            vehiculos_por_hora.append(vehiculo)
         
         print(f"Vehiculo insetado en la lista de tarifa indicada!!!")
     
@@ -138,38 +142,6 @@ def main():
             input()
         if opcion_menu == 3:   
             print("Saliendo del Programa")
-
-#Lista de autos con espacio mensual
-vehiculos = {
-    'nombre_parqueo': 'El gran Parqueo',
-    'vehiculos_espacio_mensual': [
-        {
-            'marca': 'Toyota',
-            'estilo': 'Corolla',
-            'modelo': 1995,
-            'placa': 'ABC333'
-        },
-        {
-            'marca': 'Susuki',
-            'estilo': 'Vitara',
-            'modelo': 2017,
-            'placa': 'BND947'
-        },
-        {
-            'marca': 'Mazda',
-            'estilo': '323',
-            'modelo': 2010,
-            'placa': '456875'
-        },
-        {
-            'marca': 'Hyundai',
-            'estilo': 'Tucson',
-            'modelo': 2020,
-            'placa': 'ACB458'
-        }
-    ],
-    'vehiculos_por_hora': [] 
-}
 
 if __name__ == "__main__":
     main()
