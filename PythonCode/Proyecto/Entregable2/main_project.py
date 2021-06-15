@@ -28,15 +28,20 @@ def menu_cabecera():
 ##
 # Categorias departamentales.
 #
-# Return {Boolean}
+# Return {Integer}
 ##
 def menu_departamentos():
     menu_cabecera()
     print("Seleccione un departamento:")
     terminal_menu = TerminalMenu(['Damas','Caballeros', 'Ninos', 'Salir'])
     menu_departamentos_entry_index = terminal_menu.show()
-    print(menu_departamentos_entry_index)
-    print()
+    
+    if menu_departamentos_entry_index == 3:
+        salir_sistema()
+        exit()
+        
+    return menu_departamentos_entry_index
+
     
 ##
 # Ingreso de usuarios.
@@ -53,11 +58,11 @@ def menu_login():
             active_session_info[0]['name'] = user['full_name']
             active_session_info[0]['role'] = user['role']
             limpiarConsola()
-            return True
-    print("______________________________________\n")
+            return       
+    print("_____________________________________________\n")
     print("\n\nNo hay usuario registrado con estos valores\nPrograma terminado!")
     input()
-    return False
+    exit()
 
 ##
 # Datos de la portada.
@@ -65,6 +70,7 @@ def menu_login():
 # Return {void}
 ## 
 def menu_portada():
+    limpiarConsola()
     print("______________________________________\n")
     print("     Bienvenido a Tiendas Simon")
     print("______________________________________\n")
@@ -76,29 +82,96 @@ def menu_portada():
  ##
 # Datos del menu principal.
 #
-# Return {void}
+# Return {Integer}
 ##
-def menu_principal():
+def menu_inventario():
     menu_cabecera()
     print("Opciones disponibles:")
     terminal_menu = TerminalMenu(["Inventario", "Salir"])
     menu_principal_entry_index = terminal_menu.show()
-    print(menu_principal_entry_index)
-    print()
+    
+    if menu_principal_entry_index == 1:
+        salir_sistema()
+        exit()
+
+    
 
 ##
-# Acciones realizables con los productos del departamento.
-# Parameters {String, String}
-# Return {void}
+# Acciones realizables con los productos del departamento para Admin.
+# Parameters {String}
+# Return {Integer}
 ##
 def menu_productos_departamento_admin(nombre_departamento):
     menu_cabecera()
     print(f"Menu de productos del departamento {nombre_departamento}:")
     terminal_menu = TerminalMenu(["Consultar", "Ingresar", "Actualizar", "Eliminar", "Volver", "Salir"])
     menu_productos_depart_admin_entry_index = terminal_menu.show()
-    print(menu_productos_depart_admin_entry_index)
-    print()    
+    
+    if menu_productos_depart_admin_entry_index == 5:
+       salir_sistema()
+       exit()
+       
+    return menu_productos_depart_admin_entry_index
+ 
+ ##
+# Acciones realizables con los productos del departamento para Invitado.
+# Parameters {String}
+# Return {Integer}
+##
+def menu_productos_departamento_guest(nombre_departamento):
+    menu_cabecera()
+    print(f"Menu de productos del departamento {nombre_departamento}:")
+    terminal_menu = TerminalMenu(["Consultar", "Volver", "Salir"])
+    menu_productos_depart_admin_entry_index = terminal_menu.show()
+    
+    if menu_productos_depart_admin_entry_index == 2:
+        salir_sistema()
+        exit()
+        
+    return menu_productos_depart_admin_entry_index
 
+def salir_sistema():
+    limpiarConsola()
+    print("_____________________________________________\n")
+    print("Saliendo del sistema de inventarios!!!")
+    print("_____________________________________________\n")
+    
+
+##
+# Consultar productos.
+#
+# Return {void}
+##
+def consultar_productos():
+    print("Consulta de productos")
+    input()
+
+##
+# Ingresar producto.
+#
+# Return {void}
+##
+def ingresar_producto():
+    print("Ingrese el producto")
+    input()
+
+##
+# Actualizar producto.
+#
+# Return {void}
+##
+def actualizar_producto():
+    print("Actualice el producto")
+    input()
+
+##
+# Eliminar producto.
+#
+# Return {void}
+##
+def eliminar_producto():
+    print("Eliminar el producto")
+    input()
 ##
 # Limpia la consola de Windows y MAC OS.
 #
@@ -110,133 +183,77 @@ def limpiarConsola():
     elif os.name == "ce" or os.name == "dos" or os.name == "nt":
         os.system("cls")
 
-
 ##
 # Menu de acciones.
 #
 # Return {void}
 ##
 def main():
-    limpiarConsola()
     menu_portada()
-    if menu_login() != True:
-        exit()
+    menu_login()
+    menu_inventario()
     while True:
-        try:
-            menu_principal()
+        opcion_menu_departamentos_dama = 0
+        opcion_menu_departamentos_caballeros = 0
+        opcion_menu_departamentos_ninos = 0
+        
+        opcion_menu_departamentos = menu_departamentos()
+        
+        if opcion_menu_departamentos == 0 and active_session_info[0]['role'] == "admin":
+            while opcion_menu_departamentos_dama != 4:
+                opcion_menu_departamentos_dama = menu_productos_departamento_admin("Damas")
+                if opcion_menu_departamentos_dama == 0:
+                    consultar_productos()
+                if opcion_menu_departamentos_dama == 1:
+                    ingresar_producto()
+                if opcion_menu_departamentos_dama == 2:
+                    actualizar_producto()
+                if opcion_menu_departamentos_dama == 3:
+                    eliminar_producto()
             
-            entrada_usuario = int(input("Seleccione una opcion: "))
+        if opcion_menu_departamentos == 0 and active_session_info[0]['role'] == "guest":
+            while opcion_menu_departamentos_dama != 1:
+                opcion_menu_departamentos_dama = menu_productos_departamento_guest("Damas")
+                if opcion_menu_departamentos_dama == 0:
+                    consultar_productos()
+         
 
-            if entrada_usuario in range(3):
-                
-                if entrada_usuario == 2:
-                    print("Saliendo del sistema de inventarios!!!")
-                    break
-                print()
-                
-                if entrada_usuario == 1:
-                    while True:
-                        menu_departamentos()
-                        entrada_usuario = int(input("Seleccione un departamento: "))
-                        
-                        if entrada_usuario in range(5):
-                            
-                            if entrada_usuario == 1:
-                                menu_productos_departamento("Damas",active_session_info[0]['role'])
-                                
-                                entrada_menu_productos = int(input("Seleccione una accion: "))
-                                
-                                if entrada_menu_productos in range(7):
-                                    
-                                    if entrada_menu_productos == 1:
-                                        print("Consulta de Productos")
-                                        input()
-                                        
-                                    if active_session_info[0]['role'] == "admin":
-                                        if entrada_menu_productos == 2:
-                                            print("Ingrese el Producto")
-                                            input()
-                                            
-                                            
-                                        if entrada_menu_productos == 3:
-                                            print("Actualizar el Producto")
-                                            input()
-                                            
-                                        if entrada_menu_productos == 4:
-                                            print("Elimine el Producto")
-                                            input()
-                                        
-                                    if entrada_menu_productos == 6:
-                                        print("\nSaliendo del sistema de inventarios!!!")
-                                        exit()
-
-                            if entrada_usuario == 2:
-                                menu_productos_departamento("Caballeros",active_session_info[0]['role'])
-                                
-                                entrada_menu_productos = int(input("Seleccione una accion: "))
-                                
-                                if entrada_menu_productos in range(7):
-                                    
-                                    if entrada_menu_productos == 1:
-                                        print("Consulta de Productos")
-                                        input()
-                                    if active_session_info[0]['role'] == "admin":  
-                                        if entrada_menu_productos == 2:
-                                            print("Ingrese el Producto")
-                                            input()
-                                            
-                                        if entrada_menu_productos == 3:
-                                            print("Actualizar el Producto")
-                                            input()
-                                            
-                                        if entrada_menu_productos == 4:
-                                            print("Elimine el Producto")
-                                            input()
-                                        
-                                    if entrada_menu_productos == 6:
-                                        print("\nSaliendo del sistema de inventarios!!!")
-                                        exit()
-                                
-                            if entrada_usuario == 3:
-                                menu_productos_departamento("Ninos",active_session_info[0]['role'])
-                                
-                                entrada_menu_productos = int(input("Seleccione una accion: "))
-                                
-                                if entrada_menu_productos in range(7):
-                                    if entrada_menu_productos == 1:
-                                        print("Consulta de Productos")
-                                        input()
-                                    if active_session_info[0]['role'] == "admin":   
-                                        if entrada_menu_productos == 2:
-                                            print("Ingrese el Producto")
-                                            input()
-                                            
-                                        if entrada_menu_productos == 3:
-                                            print("Actualizar el Producto")
-                                            input()
-                                            
-                                        if entrada_menu_productos == 4:
-                                            print("Elimine el Producto")
-                                            input()
-                                        
-                                    if entrada_menu_productos == 6:
-                                        print("\nSaliendo del sistema de inventarios!!!")
-                                        exit()
-
-                            if entrada_usuario == 4:
-                                print("\nSaliendo del sistema de inventarios!!!")
-                                exit()
-                #print("Usted eligió la opcion {} !\n".format(entrada_usuario))
-            else:
-                print('Error, solo de aceptan numeros del 1 al 2')
+        if opcion_menu_departamentos == 1 and active_session_info[0]['role'] == "admin":
+            while opcion_menu_departamentos_caballeros != 4:
+                opcion_menu_departamentos_caballeros = menu_productos_departamento_admin("Caballeros")
+                if opcion_menu_departamentos_caballeros == 0:
+                    consultar_productos()
+                if opcion_menu_departamentos_caballeros == 1:
+                    ingresar_producto()
+                if opcion_menu_departamentos_caballeros == 2:
+                    actualizar_producto()
+                if opcion_menu_departamentos_caballeros == 3:
+                    eliminar_producto()
             
-            input()
-            limpiarConsola()
-       
-        except ValueError:
-            print("Error, ingrese solamente numeros")
-
-
-
+        if opcion_menu_departamentos == 1 and active_session_info[0]['role'] == "guest":
+            while opcion_menu_departamentos_caballeros != 1:
+                opcion_menu_departamentos_caballeros = menu_productos_departamento_guest("Caballeros")
+                if opcion_menu_departamentos_caballeros == 0:
+                    consultar_productos()       
+        
+        
+        if opcion_menu_departamentos == 2 and active_session_info[0]['role'] == "admin":
+            while opcion_menu_departamentos_ninos != 4:
+                opcion_menu_departamentos_ninos = menu_productos_departamento_admin("Ninos")
+                if opcion_menu_departamentos_ninos == 0:
+                    consultar_productos()
+                if opcion_menu_departamentos_ninos == 1:
+                    ingresar_producto()
+                if opcion_menu_departamentos_ninos == 2:
+                    actualizar_producto()
+                if opcion_menu_departamentos_ninos == 3:
+                    eliminar_producto()
+            
+        if opcion_menu_departamentos == 2 and active_session_info[0]['role'] == "guest":
+            while opcion_menu_departamentos_ninos != 1:
+                opcion_menu_departamentos_ninos = menu_productos_departamento_guest("Ninos")
+                if opcion_menu_departamentos_ninos == 0:
+                    consultar_productos() 
+                
 if __name__ == "__main__":
     main()

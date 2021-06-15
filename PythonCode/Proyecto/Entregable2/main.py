@@ -1,6 +1,6 @@
 import os
 import profile
-import inventario
+import inventario  
 
 active_session_info= [
     {
