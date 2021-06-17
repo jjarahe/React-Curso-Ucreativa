@@ -13,7 +13,7 @@ active_session_info= [
 ]
 
 
-departamentos = ['Damas', 'Caballeros', 'Ninos']
+departamentos = ['damas', 'caballeros', 'ninos']
 
 ##
 # Datos de la cabecera del menu.
@@ -106,7 +106,7 @@ def menu_inventario():
 ##
 def menu_productos_departamento_admin(nombre_departamento):
     menu_cabecera()
-    print(f"Menu de productos del departamento {nombre_departamento}:")
+    print(f"Menu de productos del departamento {nombre_departamento.capitalize()}:")
     terminal_menu = TerminalMenu(["Consultar", "Ingresar", "Actualizar", "Eliminar", "Volver", "Salir"])
     menu_productos_depart_admin_entry_index = terminal_menu.show()
     
@@ -146,11 +146,20 @@ def salir_sistema():
 # Return {void}
 ##
 def consultar_productos(departamento):
-    productos = inventario['departamentos'][departamento]['productos']
+    productos = inventario.inventario['departamentos'][departamento]['productos']
     
+    print("______________________________________________________________\n")
+    print(f"Consulta de productos del departamento {departamento.capitalize()}")
+    print("______________________________________________________________\n")
+
     for producto in productos:
-        print(producto)
-    print("Consulta de productos")
+        print("*****************************")
+        print(f"Codigo: {producto['codigo']} ")
+        print(f"Nombre: {producto['nombre']} ")
+        print(f"Precio: {producto['precio']} ")
+        print(f"Cantidad disponible: {producto['cantidad']}")
+        print(f"*****************************\n")
+        
     input()
 
 ##

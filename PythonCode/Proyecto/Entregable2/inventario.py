@@ -6,9 +6,10 @@ inventario = {
             'nombre': 'Damas',
             'productos': [
                 {
+                    'codigo': 1111,
                     'nombre': 'Blusa',
-                    'cantidad': 100,
-                    'color': 'negro'
+                    'precio': 4000,
+                    'cantidad': 100
                 }
             ]
         },
@@ -16,9 +17,10 @@ inventario = {
             'nombre': 'Caballeros',
             'productos': [
                 {
-                    'nombre': 'Camisa',
-                    'cantidad': 100,
-                    'color': 'negro'
+                    'codigo': 2222,
+                    'nombre': 'Camisa Polo',
+                    'precio': 4000,
+                    'cantidad': 100
                 }
             ]
         },
@@ -26,22 +28,12 @@ inventario = {
             'nombre': 'Ninos',
             'productos': [
                 {
-                    'nombre': 'Chupon',
-                    'cantidad': 100,
-                    'color': 'blanco'
+                    'codigo': 3333,
+                    'nombre': 'Camiseta',
+                    'precio': 4000,
+                    'cantidad': 100
                 }
             ]
         },
     }
 }
-
-def consultar_productos(departamento):
-    productos = inventario['departamentos'][departamento]['productos']
-    for producto in productos:
-        print("*****************************")
-        print(f"Nombre del Producto {producto['nombre']} ")
-        print(f"Cantidad disponible {producto['cantidad']} ")
-        print(f"Color del Producto {producto['color']} ")
-        print("*****************************")
-        
-#consultar_productos('caballeros')
