@@ -5,12 +5,12 @@ inventario = {
         'damas':{
             'nombre': 'Damas',
             'productos': [
-                {
-                    'codigo': 1111,
-                    'nombre': 'Blusa',
-                    'precio': 4000,
-                    'cantidad': 100
-                }
+                # {
+                #     'codigo': 1111,
+                #     'nombre': 'Blusa',
+                #     'precio': 4000,
+                #     'cantidad': 100
+                # }
             ]
         },
        'caballeros':{

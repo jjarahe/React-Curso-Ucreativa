@@ -151,15 +151,17 @@ def consultar_productos(departamento):
     print("______________________________________________________________\n")
     print(f"Consulta de productos del departamento {departamento.capitalize()}")
     print("______________________________________________________________\n")
-
-    for producto in productos:
-        print("*****************************")
-        print(f"Codigo: {producto['codigo']} ")
-        print(f"Nombre: {producto['nombre']} ")
-        print(f"Precio: {producto['precio']} ")
-        print(f"Cantidad disponible: {producto['cantidad']}")
-        print(f"*****************************\n")
-        
+    
+    if len(productos) > 0:
+        for producto in productos:
+            print("*****************************")
+            print(f"Codigo: {producto['codigo']} ")
+            print(f"Nombre: {producto['nombre']} ")
+            print(f"Precio: {producto['precio']} ")
+            print(f"Cantidad disponible: {producto['cantidad']}")
+            print(f"*****************************\n")
+    else:
+        print(f"No hay productos disponibles en este departamento!!")
     input()
 
 ##
@@ -167,9 +169,28 @@ def consultar_productos(departamento):
 #
 # Return {void}
 ##
-def ingresar_producto():
-    print("Ingrese el producto")
-    input()
+def ingresar_producto(departamento):
+    try:
+        print(f"Datos del Producto: \n")
+        codigo = int(input("Codigo: "))
+        nombre = str(input("Nombre: "))
+        precio = int(input("Precio: "))
+        cantidad = int(input("Cantidad: "))
+        
+        producto = {
+            'codigo': codigo,
+            'nombre': nombre,
+            'precio': precio,
+            'cantidad': cantidad
+        }
+        
+        inventario.inventario['departamentos'][departamento]['productos'].append(producto)
+        
+    except ValueError:
+        print("Se ingreso un valor no esperado, por favor intentelo de nuevo")
+        input()
+        ingresar_producto(departamento)
+   
 
 ##
 # Actualizar producto.
@@ -209,7 +230,7 @@ def menu_opciones_manager(posicion):
         if opcion_menu_departamentos == 0:
             consultar_productos(departamento)
         if opcion_menu_departamentos == 1:
-            ingresar_producto()
+            ingresar_producto(departamento)
         if opcion_menu_departamentos == 2:
             actualizar_producto()
         if opcion_menu_departamentos == 3:
