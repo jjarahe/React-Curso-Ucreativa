@@ -116,6 +116,7 @@ def registrar_vehiculo():
 
         if tipo_tarifa == 0:
             base_datos.vehiculos["vehiculos_espacio_mensual"].append(vehiculo)
+            vehiculos_por_hora.append(vehiculo)
         if tipo_tarifa == 1:
             vehiculos_por_hora.append(vehiculo)
         
