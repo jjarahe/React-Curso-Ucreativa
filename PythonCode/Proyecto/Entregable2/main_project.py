@@ -61,7 +61,7 @@ def menu_login():
             active_session_info[0]['name'] = user['full_name']
             active_session_info[0]['role'] = user['role']
             limpiarConsola()
-            return       
+            return
     print("_____________________________________________\n")
     print("\n\nNo hay usuario registrado con estos valores\nPrograma terminado!")
     input()
@@ -174,7 +174,7 @@ def ingresar_producto(departamento):
         print(f"Datos del Producto: \n")
         codigo = int(input("Codigo: "))
         nombre = str(input("Nombre: "))
-        precio = int(input("Precio: "))
+        precio = float(input("Precio: "))
         cantidad = int(input("Cantidad: "))
         
         producto = {
