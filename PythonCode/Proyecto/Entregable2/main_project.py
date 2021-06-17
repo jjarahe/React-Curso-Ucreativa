@@ -12,6 +12,9 @@ active_session_info= [
     }
 ]
 
+
+departamentos = ['Damas', 'Caballeros', 'Ninos']
+
 ##
 # Datos de la cabecera del menu.
 #
@@ -142,7 +145,11 @@ def salir_sistema():
 #
 # Return {void}
 ##
-def consultar_productos():
+def consultar_productos(departamento):
+    productos = inventario['departamentos'][departamento]['productos']
+    
+    for producto in productos:
+        print(producto)
     print("Consulta de productos")
     input()
 
@@ -183,6 +190,30 @@ def limpiarConsola():
     elif os.name == "ce" or os.name == "dos" or os.name == "nt":
         os.system("cls")
 
+def menu_opciones_manager(posicion):
+    opcion_menu_departamentos = None
+    
+    departamento = departamentos[posicion]
+    
+    while opcion_menu_departamentos != 4:
+        opcion_menu_departamentos = menu_productos_departamento_admin(departamento)
+        if opcion_menu_departamentos == 0:
+            consultar_productos(departamento)
+        if opcion_menu_departamentos == 1:
+            ingresar_producto()
+        if opcion_menu_departamentos == 2:
+            actualizar_producto()
+        if opcion_menu_departamentos == 3:
+            eliminar_producto()
+
+
+def menu_opciones_guest(departamento):
+    opcion_menu_departamentos = None
+    
+    while opcion_menu_departamentos != 1:
+        opcion_menu_departamentos = menu_productos_departamento_guest(departamentos[departamento])
+        if opcion_menu_departamentos == 0:
+            consultar_productos()
 ##
 # Menu de acciones.
 #
@@ -193,65 +224,13 @@ def main():
     menu_login()
     menu_inventario()
     while True:
-        opcion_menu_departamentos = 10
-
-        opcion_menu = menu_departamentos()
-        
-        if opcion_menu == 0 and active_session_info[0]['role'] == "admin":
-            while opcion_menu_departamentos != 4:
-                opcion_menu_departamentos = menu_productos_departamento_admin("Damas")
-                if opcion_menu_departamentos == 0:
-                    consultar_productos()
-                if opcion_menu_departamentos == 1:
-                    ingresar_producto()
-                if opcion_menu_departamentos == 2:
-                    actualizar_producto()
-                if opcion_menu_departamentos == 3:
-                    eliminar_producto()
+        opcion_departamento = menu_departamentos()
+          
+        if active_session_info[0]['role'] == "admin":
+            menu_opciones_manager(opcion_departamento)
             
-        if opcion_menu == 0 and active_session_info[0]['role'] == "guest":
-            while opcion_menu_departamentos != 1:
-                opcion_menu_departamentos = menu_productos_departamento_guest("Damas")
-                if opcion_menu_departamentos == 0:
-                    consultar_productos()
-         
-
-        if opcion_menu == 1 and active_session_info[0]['role'] == "admin":
-            while opcion_menu_departamentos != 4:
-                opcion_menu_departamentos = menu_productos_departamento_admin("Caballeros")
-                if opcion_menu_departamentos == 0:
-                    consultar_productos()
-                if opcion_menu_departamentos == 1:
-                    ingresar_producto()
-                if opcion_menu_departamentos == 2:
-                    actualizar_producto()
-                if opcion_menu_departamentos == 3:
-                    eliminar_producto()
-            
-        if opcion_menu == 1 and active_session_info[0]['role'] == "guest":
-            while opcion_menu_departamentos != 1:
-                opcion_menu_departamentos = menu_productos_departamento_guest("Caballeros")
-                if opcion_menu_departamentos == 0:
-                    consultar_productos()       
-        
-        
-        if opcion_menu == 2 and active_session_info[0]['role'] == "admin":
-            while opcion_menu_departamentos != 4:
-                opcion_menu_departamentos = menu_productos_departamento_admin("Ninos")
-                if opcion_menu_departamentos == 0:
-                    consultar_productos()
-                if opcion_menu_departamentos == 1:
-                    ingresar_producto()
-                if opcion_menu_departamentos == 2:
-                    actualizar_producto()
-                if opcion_menu_departamentos == 3:
-                    eliminar_producto()
-            
-        if opcion_menu == 2 and active_session_info[0]['role'] == "guest":
-            while opcion_menu_departamentos != 1:
-                opcion_menu_departamentos = menu_productos_departamento_guest("Ninos")
-                if opcion_menu_departamentos == 0:
-                    consultar_productos() 
+        if active_session_info[0]['role'] == "guest":
+            menu_opciones_guest(opcion_departamento)
                 
 if __name__ == "__main__":
     main()
