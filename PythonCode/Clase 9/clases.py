@@ -21,16 +21,18 @@ def porcentaje(notas):
 #print(porcentaje(mi_estudiante['notas']))
 
 class Estudiante:
-    def __init__(self, nombre, edad, notas):
+    def __init__(self, nombre, apellido, edad, notas):
         self.nombre = nombre
+        self.apellido = apellido
         self.edad = edad
         self.notas = notas
+        
         
     def porcentage(self):
         return sum(self.notas) / len(self.notas)
 
 try:
-    estudiante_uno = Estudiante('Luis', 25, [100,85,90,89,97])
+    estudiante_uno = Estudiante('Luis', 'Jara', 25, [100,85,90,89,97])
     print(estudiante_uno.promedio())
     #print(estudiante_uno.nombre)
     #print(estudiante_uno.edad)
@@ -45,11 +47,14 @@ class Pelicula:
         self.director = director
         self.annio = annio
         
+        
     def obtener_nombre(self):
         return self.nombre
         
     def obtener_director(self):
         return self.director
+        
+    
 
 pelicula_uno = Pelicula('Fast and Furious','Justin Lin')
 pelicula_dos= Pelicula('Buscando a Nemo','Andrew Stanton')
