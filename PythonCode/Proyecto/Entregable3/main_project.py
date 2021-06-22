@@ -190,25 +190,105 @@ def ingresar_producto(departamento):
         print("Se ingreso un valor no esperado, por favor intentelo de nuevo")
         input()
         ingresar_producto(departamento)
-   
 
+
+##
+# Buscar producto por codigo.
+#
+# Return {Integer}
+##
+def buscar_producto(codigo,departamento):
+    productos = inventario.inventario['departamentos'][departamento]['productos']
+    for (index, producto) in enumerate(productos):
+        if producto['codigo'] == codigo:
+            return index
+    
+    return None
+    
 ##
 # Actualizar producto.
 #
 # Return {void}
 ##
-def actualizar_producto():
-    print("Actualice el producto")
-    input()
-
+def actualizar_producto(departamento):
+    try:
+        limpiarConsola()
+        print("______________________________________________________________\n")
+        print(f"Actualizando Productos del departamento {departamento.capitalize()}")
+        print("______________________________________________________________\n")
+        index = buscar_producto(int(input("Digite el codigo del producto que desea actualizar: ")),departamento)
+        
+        if index != None:
+            producto = inventario.inventario['departamentos'][departamento]['productos'][index]
+            
+            print("\n*********Producto seleccionado***********")
+            print(f"Codigo: {producto['codigo']} ")
+            print(f"Nombre: {producto['nombre']} ")
+            print(f"Precio: {producto['precio']} ")
+            print(f"Cantidad disponible: {producto['cantidad']}")
+            print(f"****************************************\n")
+       
+            opcion = input(f"Desea actualizar el nombre {producto['nombre']}? (si / no): ")
+            if opcion.lower() == "si":
+                nombre = str(input("Nombre: "))
+                inventario.inventario['departamentos'][departamento]['productos'][index]['nombre'] = nombre
+                
+            opcion = input(f"Desea actualizar el precio {producto['precio']}? (si / no): ")
+            if opcion.lower() == "si":
+                precio = float(input("Precio: "))
+                inventario.inventario['departamentos'][departamento]['productos'][index]['precio'] = precio
+        
+            opcion = input(f"Desea actualizar la cantidad {producto['cantidad']}? (si / no): ")
+            if opcion.lower() == "si":
+                cantidad = int(input("Cantidad: "))
+                inventario.inventario['departamentos'][departamento]['productos'][index]['cantidad'] = cantidad
+        
+        else:
+            print("Ese codigo de producto no existe!")
+        input()
+            
+    except ValueError:
+        print("Se ingreso un valor no esperado, por favor intentelo de nuevo")
+        input()
+        actualizar_producto(departamento)
+    
+    
+    
 ##
 # Eliminar producto.
 #
 # Return {void}
 ##
-def eliminar_producto():
-    print("Eliminar el producto")
-    input()
+def eliminar_producto(departamento):
+    try:
+        limpiarConsola()
+        print("______________________________________________________________\n")
+        print(f"Eliminar Productos del departamento {departamento.capitalize()}")
+        print("______________________________________________________________\n")
+        index = buscar_producto(int(input("Digite el codigo del producto que desea eliminar: ")),departamento)
+        
+        if index != None:
+            producto = inventario.inventario['departamentos'][departamento]['productos'][index]
+            
+            print("\n*********Producto seleccionado***********")
+            print(f"Codigo: {producto['codigo']} ")
+            print(f"Nombre: {producto['nombre']} ")
+            print(f"Precio: {producto['precio']} ")
+            print(f"Cantidad disponible: {producto['cantidad']}")
+            print(f"****************************************\n")
+           
+            opcion = input(f"Esta seguro que desea eliminar el producto codigo {producto['codigo']}? (si / no): ")
+            if opcion.lower() == "si":
+                inventario.inventario['departamentos'][departamento]['productos'].pop(index)
+        else:
+            print("Ese codigo de producto no existe!")
+        input()
+        
+    except ValueError:
+        print("Se ingreso un valor no esperado, por favor intentelo de nuevo")
+        input()
+        eliminar_producto(departamento)
+
 ##
 # Limpia la consola de Windows y MAC OS.
 #
@@ -232,9 +312,9 @@ def menu_opciones_manager(posicion):
         if opcion_menu_departamentos == 1:
             ingresar_producto(departamento)
         if opcion_menu_departamentos == 2:
-            actualizar_producto()
+            actualizar_producto(departamento)
         if opcion_menu_departamentos == 3:
-            eliminar_producto()
+            eliminar_producto(departamento)
 
 
 def menu_opciones_guest(departamento):
