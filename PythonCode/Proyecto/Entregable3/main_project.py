@@ -1,5 +1,6 @@
 import os
 from simple_term_menu import TerminalMenu
+from archivo import leer, escribir
 import profile
 import inventario
 
@@ -12,7 +13,7 @@ active_session_info= [
     }
 ]
 
-
+inventario_archivo = {}
 departamentos = ['damas', 'caballeros', 'ninos']
 
 ##
@@ -27,6 +28,23 @@ def menu_cabecera():
     print(f"{ active_session_info[0]['name']} es un placer atenderle")
     print("______________________________________________________________\n")
     print()
+    
+    
+def leer_archivo(nombre_archivo = 'inventario.json'):
+    global inventario_archivo
+    try:
+        inventario_archivo = leer(nombre_archivo)
+    except FileNotFoundError:
+        inventario_archivo = inventario.inventario
+
+def escribir_archivo(inventario, nombre_archivo = 'inventario'):
+    if escribir(nombre_archivo, inventario):
+        limpiarConsola()
+        print("______________________________________\n")
+        print("  El archivo se guardo correctamente!")
+        print("______________________________________\n")
+        input()
+    
 
 ##
 # Categorias departamentales.
@@ -36,10 +54,10 @@ def menu_cabecera():
 def menu_departamentos():
     menu_cabecera()
     print("Seleccione un departamento:")
-    terminal_menu = TerminalMenu(['Damas','Caballeros', 'Ninos', 'Salir'])
+    terminal_menu = TerminalMenu(['Damas','Caballeros', 'Ninos', 'Guardar', 'Salir'])
     menu_departamentos_entry_index = terminal_menu.show()
     
-    if menu_departamentos_entry_index == 3:
+    if menu_departamentos_entry_index == 4:
         salir_sistema()
         exit()
         
@@ -107,10 +125,10 @@ def menu_inventario():
 def menu_productos_departamento_admin(nombre_departamento):
     menu_cabecera()
     print(f"Menu de productos del departamento {nombre_departamento.capitalize()}:")
-    terminal_menu = TerminalMenu(["Consultar", "Ingresar", "Actualizar", "Eliminar", "Volver", "Salir"])
+    terminal_menu = TerminalMenu(["Consultar", "Ingresar", "Actualizar", "Eliminar", "Guardar", "Volver", "Salir"])
     menu_productos_depart_admin_entry_index = terminal_menu.show()
     
-    if menu_productos_depart_admin_entry_index == 5:
+    if menu_productos_depart_admin_entry_index == 6:
        salir_sistema()
        exit()
        
@@ -146,7 +164,8 @@ def salir_sistema():
 # Return {void}
 ##
 def consultar_productos(departamento):
-    productos = inventario.inventario['departamentos'][departamento]['productos']
+    global inventario_archivo
+    productos = inventario_archivo['departamentos'][departamento]['productos']
     
     print("______________________________________________________________\n")
     print(f"Consulta de productos del departamento {departamento.capitalize()}")
@@ -170,6 +189,7 @@ def consultar_productos(departamento):
 # Return {void}
 ##
 def ingresar_producto(departamento):
+    global inventario_archivo
     try:
         print(f"Datos del Producto: \n")
         codigo = int(input("Codigo: "))
@@ -184,7 +204,7 @@ def ingresar_producto(departamento):
             'cantidad': cantidad
         }
         
-        inventario.inventario['departamentos'][departamento]['productos'].append(producto)
+        inventario_archivo['departamentos'][departamento]['productos'].append(producto)
         
     except ValueError:
         print("Se ingreso un valor no esperado, por favor intentelo de nuevo")
@@ -198,7 +218,8 @@ def ingresar_producto(departamento):
 # Return {Integer}
 ##
 def buscar_producto(codigo,departamento):
-    productos = inventario.inventario['departamentos'][departamento]['productos']
+    global inventario_archivo
+    productos = inventario_archivo['departamentos'][departamento]['productos']
     for (index, producto) in enumerate(productos):
         if producto['codigo'] == codigo:
             return index
@@ -211,6 +232,7 @@ def buscar_producto(codigo,departamento):
 # Return {void}
 ##
 def actualizar_producto(departamento):
+    global inventario_archivo
     try:
         limpiarConsola()
         print("______________________________________________________________\n")
@@ -219,7 +241,7 @@ def actualizar_producto(departamento):
         index = buscar_producto(int(input("Digite el codigo del producto que desea actualizar: ")),departamento)
         
         if index != None:
-            producto = inventario.inventario['departamentos'][departamento]['productos'][index]
+            producto = inventario_archivo['departamentos'][departamento]['productos'][index]
             
             print("\n*********Producto seleccionado***********")
             print(f"Codigo: {producto['codigo']} ")
@@ -231,17 +253,17 @@ def actualizar_producto(departamento):
             opcion = input(f"Desea actualizar el nombre {producto['nombre']}? (si / no): ")
             if opcion.lower() == "si":
                 nombre = str(input("Nombre: "))
-                inventario.inventario['departamentos'][departamento]['productos'][index]['nombre'] = nombre
+                inventario_archivo['departamentos'][departamento]['productos'][index]['nombre'] = nombre
                 
             opcion = input(f"Desea actualizar el precio {producto['precio']}? (si / no): ")
             if opcion.lower() == "si":
                 precio = float(input("Precio: "))
-                inventario.inventario['departamentos'][departamento]['productos'][index]['precio'] = precio
+                inventario_archivo['departamentos'][departamento]['productos'][index]['precio'] = precio
         
             opcion = input(f"Desea actualizar la cantidad {producto['cantidad']}? (si / no): ")
             if opcion.lower() == "si":
                 cantidad = int(input("Cantidad: "))
-                inventario.inventario['departamentos'][departamento]['productos'][index]['cantidad'] = cantidad
+                inventario_archivo['departamentos'][departamento]['productos'][index]['cantidad'] = cantidad
         
         else:
             print("Ese codigo de producto no existe!")
@@ -260,6 +282,7 @@ def actualizar_producto(departamento):
 # Return {void}
 ##
 def eliminar_producto(departamento):
+    global inventario_archivo
     try:
         limpiarConsola()
         print("______________________________________________________________\n")
@@ -268,7 +291,7 @@ def eliminar_producto(departamento):
         index = buscar_producto(int(input("Digite el codigo del producto que desea eliminar: ")),departamento)
         
         if index != None:
-            producto = inventario.inventario['departamentos'][departamento]['productos'][index]
+            producto = inventario_archivo['departamentos'][departamento]['productos'][index]
             
             print("\n*********Producto seleccionado***********")
             print(f"Codigo: {producto['codigo']} ")
@@ -279,7 +302,7 @@ def eliminar_producto(departamento):
            
             opcion = input(f"Esta seguro que desea eliminar el producto codigo {producto['codigo']}? (si / no): ")
             if opcion.lower() == "si":
-                inventario.inventario['departamentos'][departamento]['productos'].pop(index)
+                inventario_archivo['departamentos'][departamento]['productos'].pop(index)
         else:
             print("Ese codigo de producto no existe!")
         input()
@@ -301,11 +324,12 @@ def limpiarConsola():
         os.system("cls")
 
 def menu_opciones_manager(posicion):
+    global inventario_archivo
     opcion_menu_departamentos = None
     
     departamento = departamentos[posicion]
     
-    while opcion_menu_departamentos != 4:
+    while opcion_menu_departamentos != 5:
         opcion_menu_departamentos = menu_productos_departamento_admin(departamento)
         if opcion_menu_departamentos == 0:
             consultar_productos(departamento)
@@ -315,32 +339,38 @@ def menu_opciones_manager(posicion):
             actualizar_producto(departamento)
         if opcion_menu_departamentos == 3:
             eliminar_producto(departamento)
+        if opcion_menu_departamentos == 4:
+            escribir_archivo(inventario_archivo)
 
 
-def menu_opciones_guest(departamento):
+def menu_opciones_guest(posicion):
     opcion_menu_departamentos = None
+    departamento = departamentos[posicion]
     
     while opcion_menu_departamentos != 1:
-        opcion_menu_departamentos = menu_productos_departamento_guest(departamentos[departamento])
+        opcion_menu_departamentos = menu_productos_departamento_guest(departamento)
         if opcion_menu_departamentos == 0:
-            consultar_productos()
+            consultar_productos(departamento)
 ##
 # Menu de acciones.
 #
 # Return {void}
 ##
 def main():
+    leer_archivo()
     menu_portada()
     menu_login()
     menu_inventario()
     while True:
         opcion_departamento = menu_departamentos()
-          
+   
         if active_session_info[0]['role'] == "admin":
             menu_opciones_manager(opcion_departamento)
             
         if active_session_info[0]['role'] == "guest":
             menu_opciones_guest(opcion_departamento)
+            
+            
                 
 if __name__ == "__main__":
     main()
