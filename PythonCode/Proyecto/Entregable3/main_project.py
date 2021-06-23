@@ -54,10 +54,10 @@ def escribir_archivo(inventario, nombre_archivo = 'inventario'):
 def menu_departamentos():
     menu_cabecera()
     print("Seleccione un departamento:")
-    terminal_menu = TerminalMenu(['Damas','Caballeros', 'Ninos', 'Guardar', 'Salir'])
+    terminal_menu = TerminalMenu(['Damas','Caballeros', 'Ninos', 'Salir'])
     menu_departamentos_entry_index = terminal_menu.show()
     
-    if menu_departamentos_entry_index == 4:
+    if menu_departamentos_entry_index == 3:
         salir_sistema()
         exit()
         
@@ -125,7 +125,7 @@ def menu_inventario():
 def menu_productos_departamento_admin(nombre_departamento):
     menu_cabecera()
     print(f"Menu de productos del departamento {nombre_departamento.capitalize()}:")
-    terminal_menu = TerminalMenu(["Consultar", "Ingresar", "Actualizar", "Eliminar", "Guardar", "Volver", "Salir"])
+    terminal_menu = TerminalMenu(["Consultar", "Ingresar", "Actualizar", "Eliminar", "Guardar", "Volver", "Salir"])          
     menu_productos_depart_admin_entry_index = terminal_menu.show()
     
     if menu_productos_depart_admin_entry_index == 6:
@@ -208,7 +208,7 @@ def ingresar_producto(departamento):
         
     except ValueError:
         print("Se ingreso un valor no esperado, por favor intentelo de nuevo")
-        input()
+        input("\nPresione Enter para continuar!")
         ingresar_producto(departamento)
 
 
@@ -267,11 +267,11 @@ def actualizar_producto(departamento):
         
         else:
             print("Ese codigo de producto no existe!")
-        input()
+        input("\nPresione Enter para continuar!")
             
     except ValueError:
         print("Se ingreso un valor no esperado, por favor intentelo de nuevo")
-        input()
+        input("\nPresione Enter para continuar!")
         actualizar_producto(departamento)
     
     
@@ -299,17 +299,22 @@ def eliminar_producto(departamento):
             print(f"Precio: {producto['precio']} ")
             print(f"Cantidad disponible: {producto['cantidad']}")
             print(f"****************************************\n")
-           
-            opcion = input(f"Esta seguro que desea eliminar el producto codigo {producto['codigo']}? (si / no): ")
+            opcion = ""
+            
+            while opcion != "si" and opcion != "no":
+                opcion = input(f"Esta seguro que desea eliminar el producto codigo {producto['codigo']}? (si / no): ")
+                if opcion.isalpha() != True:
+                    print("\nPor favor digite una opcion valida (si / no)\n")
+                    
             if opcion.lower() == "si":
                 inventario_archivo['departamentos'][departamento]['productos'].pop(index)
         else:
             print("Ese codigo de producto no existe!")
-        input()
+        input("\nPresione Enter para continuar!")
         
     except ValueError:
         print("Se ingreso un valor no esperado, por favor intentelo de nuevo")
-        input()
+        input("\nPresione Enter para continuar!")
         eliminar_producto(departamento)
 
 ##
