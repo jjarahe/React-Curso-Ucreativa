@@ -2,6 +2,12 @@
 #python3 -m pip install simple-term-menu
 #pip install simple-term-menu
 from simple_term_menu import TerminalMenu
+import os
+if os.name == "nt":
+    import msvcrt
+else:
+    import tty
+    import termios
 
 
 def main():
