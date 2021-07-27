@@ -1,0 +1,17 @@
+/* Podemos seleccionar y aplicar estillos a todoso los elementos del mismo tipo ej: h3
+*/
+h3 {
+    color: chartreuse
+
+}
+
+/*Seleccionar mediate su id*/
+#contenedor {
+    border: 1px black solid;
+    margin-bottom: 2rem;
+}
+
+.contendor-principal {
+    border: 1px olivedrab dotted;
+    margin: 1rem
+}

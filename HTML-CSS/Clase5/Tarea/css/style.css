@@ -1,0 +1,39 @@
+* {
+    margin: 1rem;
+}
+
+header > h2 {
+    color: blue;
+}
+
+.main-menu {
+  margin-right: 2rem;  
+}
+.main-menu > li {
+    display: inline-block;
+    margin: 2rem;
+}
+
+.main-menu > li:last-child {
+    color: green;
+}
+
+div> section:first-child> article h2 {
+    color: orange;
+}
+section {
+   border: 1px solid black;
+}
+section:nth-child(2) {
+    border: 1px dotted red;
+}
+
+footer {
+    text-align: center;
+}
+
+footer > a {
+    text-decoration: none;
+    color: black;
+    cursor: grab;
+}

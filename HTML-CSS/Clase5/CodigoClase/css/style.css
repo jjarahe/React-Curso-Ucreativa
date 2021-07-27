@@ -1,0 +1,34 @@
+* {
+    margin: 1rem;
+    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+    color: black;
+    margin: 1rem;
+}
+
+h1 {
+    color: blue;
+}
+
+h1 {
+    color: green;
+}
+
+p {
+    color: red;
+}
+
+footer p {
+    color: blue;
+}
+
+.main-content {
+    border: solid black 1px;
+}
+
+#main-text {
+    color: orange;
+}
+
+.main-content > p:nth-child(2) {
+    color: gray;
+}
