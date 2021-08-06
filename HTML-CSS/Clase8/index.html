@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1>Fundamentos</h1>
+        <ol>
+            <li>Se basa en un contenedor</li>
+            <li>Contiene Flex items</li>
+            <li>Estos elementos le deben siflexibilidad a su elemento padre</li>
+            <li>Tenemos dos ejes: 1-Los elementos se despliegan de izquierda a derecha y transversalmente de arriba a abajo</li>
+            <li>Todo se organiza por filas o columnas <strong>NO AMBAS!</strong></li>
+        </ol>
+    </div>
+    
+    <div>
+        <h2>Ejemplo 1 - Flex Container</h2>
+        <div class="flex-container">
+            <div class="flex-item">Box 1</div>
+            <div class="flex-item">Box 2</div>
+            <div class="flex-item">Box 3</div>
+        </div>
+        <p>En este ejemplo no hacemos nada fuera de lo normal, ya que estamos utilizando los valores por defecto del flexbox</p>
+    </div>
+    
+    <div>
+        <h2>Ejemplo 2 - Justify Content</h2>
+        <p>Existen 5 propiedades:</p>
+        <ol>
+            <li>/li>
+            <li>Flex-end</li>
+            <li>Center</li>
+            <li>space-around</li>
+            <li>space-between</li>
+        </ol>
+        <h3>Flex-start</h3>
+        <div class="flex-container start">
+            <div class="flex-item">Box 1</div>
+            <div class="flex-item">Box 2</div>
+            <div class="flex-item">Box 3</div>
+        </div>
+        <h3>Flex-end</h3>
+        <div class="flex-container end">
+            <div class="flex-item">Box 1</div>
+            <div class="flex-item">Box 2</div>
+            <div class="flex-item">Box 3</div>
+        </div>
+        
+        <h3>Flex Center</h3>
+        <div class="flex-container center">
+            <div class="flex-item">Box 1</div>
+            <div class="flex-item">Box 2</div>
+            <div class="flex-item">Box 3</div>
+        </div>
+        
+        <h3>Space Around</h3>
+        <div class="flex-container around">
+            <div class="flex-item">Box 1</div>
+            <div class="flex-item">Box 2</div>
+            <div class="flex-item">Box 3</div>
+        </div>
+        
+        <h3>Space Between</h3>
+        <div class="flex-container between">
+            <div class="flex-item">Box 1</div>
+            <div class="flex-item">Box 2</div>
+            <div class="flex-item">Box 3</div>
+            <div class="flex-item">Box 4</div>
+        </div>
+        
+        <h3>EJEMPLO 3 - NO TODO ES LINEAL</h3>
+        <div class="flex-container between">
+            <div class="flex-sub-item">Box 1</div>
+            <div class="flex-item">Box 2</div>
+            <div class="flex-item">Box 3</div>
+            <div class="flex-item">Box 4</div>
+        </div>
+    </div>
+</body>
+</html>
