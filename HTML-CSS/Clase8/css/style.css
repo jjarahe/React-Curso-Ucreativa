@@ -1,0 +1,43 @@
+.flex-container {
+    background-color: cadetblue;
+    border: 1px solid gray;
+    display: flex;
+    height: 10rem;
+    margin-bottom: 5rem;
+}
+
+.flex-item {
+    background-color: white;
+    border: 1px solid black;
+    font-size: 2em;
+    height: 5rem;
+    margin: 1rem;
+    padding: 1rem;
+    width: 5rem; â
+}
+
+.start {
+    justify-content: flex-start;
+}
+
+.end {
+    justify-content: flex-end;
+}
+
+.center {
+    justify-content: center;
+}
+
+.around {
+    justify-content: space-around;
+}
+
+.between {
+    justify-content: space-between;
+}
+
+.flex-sub_item {
+    background-color: darkgoldenrod
+    heigj-
+    marfoo;
+}
