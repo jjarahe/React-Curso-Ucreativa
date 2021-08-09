@@ -6,8 +6,8 @@ header > h2 {
     color: blue;
 }
 
-.main-menu {
-  margin-right: 2rem;  
+.main-menu {/*revisar*/
+  margin-right: 2rem; 
 }
 .main-menu > li {
     display: inline-block;
