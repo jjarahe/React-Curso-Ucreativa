@@ -24,13 +24,22 @@ body.appendChild(div_lista)
 
 const boton_h1_color = document.createElement("button")
 boton_h1_color.innerHTML = 'Cambia Color'
-boton_h1_color.addEventListener ("click", function(){
+/*boton_h1_color.addEventListener ("click", function(){
     var h1Element = document.querySelector('h1')
     if(h1Element.classList.contains('red-text'))
         h1Element.classList.remove('red-text')
     else
         h1Element.classList.add('red-text')
-});
+});*/
+
+boton_h1_color.onclick = function(){
+    var h1Element = document.querySelector('h1')
+    if(h1Element.classList.contains('red-text'))
+        h1Element.classList.remove('red-text')
+    else
+        h1Element.classList.add('red-text')
+}
+
 div_titulo.appendChild(boton_h1_color)
 
 
