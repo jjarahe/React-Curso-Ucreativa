@@ -7,12 +7,12 @@ const things = ['HOUSE MD', 'BREAKING BAD', 'THE OFFICE', 'DEXTER', 'RICK AND MO
 const nombreUno = 'Micheal';
 const apellidoUno = 'Scott';
 const direccionUno = 'Scranton, PA';
-const ocupacion = 'Gerente';
+const ocupacionUno = 'Gerente';
 
 const nombreDos = 'Gregory';
-const apellidoUno = 'House';
-const direccionUno = 'Scranton, PA';
-const ocupacion = 'Doctor'
+const apellidoDos = 'House';
+const direccionDos = 'Scranton, PA';
+const ocupacionDos = 'Doctor'
 
 
 function getRandomInt(min, max) {
@@ -24,6 +24,70 @@ function getRandomInt(min, max) {
 const boton = document.querySelector('#boton1');
 const body = document.querySelector('body');
 boton.onclick = (e) => {
-  console.log("Click");
+  document.querySelector('textarea').textContent = JSON.stringify(procesarFormulario())
 }
 
+function cazarPares(lista) {
+    const listaPares = [];
+    lista.forEach( element => {
+        if(element%2 === 0){
+            listaPares.push(element);
+        }
+    });
+    return listaPares;
+}
+
+function numerosMenoresCincuenta(lista) {
+    const listaResultado = [];
+    lista.forEach(elemento => {
+        if(elemento <= 50){
+            listaResultado.push(elemento);
+        }    
+    });
+    return listaResultado;
+}
+
+function minusculas(lista){
+    const listaResultado = [];
+    lista.forEach(elem => {
+        listaResultado.push(elem.toLowerCase())
+    })
+    return listaResultado
+}
+
+const persona = {
+    nombre: nombreUno, 
+    apellido: apellidoUno,
+    direccion: direccionUno,
+    ocupacion: ocupacionUno
+}
+
+const persona2 = {
+    nombre: nombreDos, 
+    apellido: apellidoDos,
+    direccion: direccionDos,
+    ocupacion: ocupacionDos
+}
+
+//JSON tiene 2 funciones stringify y parse.
+function procesarPersona(persona){
+    document.querySelector('textarea').textContent = JSON.stringify(persona, null, 4)
+}
+
+procesarPersona(persona)
+
+
+function procesarFormulario(){
+    const persona = {
+        nombre: '',
+        apellido: '',
+        pais: ''
+    }
+    const  textos = document.querySelectorAll('input[type=text]')
+    persona.nombre = textos[0].value
+    persona.apellido = textos[1].value
+    
+    persona.pais = document.querySelector('#country').value
+    
+    return persona
+}
