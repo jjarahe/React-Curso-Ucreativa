@@ -21,10 +21,20 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
 }
 
+function cambiarColorFondo(colors){
+    //const bodyElement = document.querySelector('body')
+    //bodyElement.style.backgroundColor = colors[getRandomInt(0,colors.length)]
+    document.body.style.background =  colors[getRandomInt(0,colors.length)]
+    console.log( colors[getRandomInt(0,colors.length)])
+    
+}
+
 const boton = document.querySelector('#boton1');
 const body = document.querySelector('body');
-boton.onclick = (e) => {
-  document.querySelector('textarea').textContent = JSON.stringify(procesarFormulario())
+
+boton.onclick = () => {
+    cambiarColorFondo(colors)
+    //document.querySelector('textarea').textContent = JSON.stringify(procesarFormulario())
 }
 
 function cazarPares(lista) {
