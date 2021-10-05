@@ -22,19 +22,18 @@ function getRandomInt(min, max) {
 }
 
 function cambiarColorFondo(colors){
-    //const bodyElement = document.querySelector('body')
-    //bodyElement.style.backgroundColor = colors[getRandomInt(0,colors.length)]
     document.body.style.background =  colors[getRandomInt(0,colors.length)]
-    console.log( colors[getRandomInt(0,colors.length)])
-    
+    //console.log( colors[getRandomInt(0,colors.length)])
 }
 
 const boton = document.querySelector('#boton1');
 const body = document.querySelector('body');
+const listaPersonas = []
 
 boton.onclick = () => {
-    cambiarColorFondo(colors)
-    //document.querySelector('textarea').textContent = JSON.stringify(procesarFormulario())
+   //cambiarColorFondo(colors)
+    procesarFormulario()
+    document.querySelector('textarea').textContent = JSON.stringify(listaPersonas,null, 4)
 }
 
 function cazarPares(lista) {
@@ -84,20 +83,40 @@ function procesarPersona(persona){
     document.querySelector('textarea').textContent = JSON.stringify(persona, null, 4)
 }
 
-procesarPersona(persona)
-
 
 function procesarFormulario(){
     const persona = {
         nombre: '',
         apellido: '',
-        pais: ''
+        pais: '',
+        lenguajeFavorito: '',
+        edad: '',
+        vehiculos: []
     }
     const  textos = document.querySelectorAll('input[type=text]')
     persona.nombre = textos[0].value
     persona.apellido = textos[1].value
-    
     persona.pais = document.querySelector('#country').value
+    //persona.lenguajeFavorito = document.querySelector("input[name=fav_language]:checked").value
+    document.querySelectorAll('input[name="fav_language"]').forEach(element => {
+        if(element.checked){
+            persona.lenguajeFavorito = element.value
+        }
+    })
     
-    return persona
+    //persona.edad = document.querySelector("input[name=age]:checked").value 
+    document.querySelectorAll('input[name="age"]').forEach(element => {
+        if(element.checked){
+            persona.edad = element.value
+        }
+    })
+    
+    //persona.vehiculos = document.querySelectorAll('input[type=checkbox]:checked').value;
+    document.querySelectorAll('input[type=checkbox]').forEach(element => {
+        if(element.checked){
+            persona.vehiculos.push(element.value) 
+        }
+    })
+
+    listaPersonas.push(persona)
 }
