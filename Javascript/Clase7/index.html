@@ -11,7 +11,7 @@
 <body>
     <div class="testbox">
 
-        <form onsubmit="return procesarFormulario()">
+        <form onsubmit="return procesarFormulario()" method="POST">
             <div class="banner">
                 <h1>Formulario de Membresía para Gimnasio</h1>
             </div>
@@ -33,15 +33,15 @@
             </div>
             <div class="item">
                 <p>Peso<span class="required">*</span></p>
-                <input type="text" name="name" required/>
+                <input type="text" name="peso" required/>
             </div>
             <div class="item">
                 <p>Altura<span class="required">*</span></p>
-                <input type="text" name="name" required/>
+                <input type="text" name="altura" required/>
             </div>
             <div class="item">
                 <p>Dirección<span class="required">*</span></p>
-                <input type="text" name="name" placeholder="Dirección exacta" required/>
+                <input type="text" name="direccion" placeholder="Dirección exacta" required/>
                 <div class="city-item">
                     <input type="text" name="name" placeholder="Cantón" required/>
                     <input type="text" name="name" placeholder="Distrito" required/>
@@ -88,7 +88,7 @@
                 </div>
             </div>
             <div class="btn-block">
-                <button>Enviar</button>
+                <button type="submit">Enviar</button>
             </div>
         </form>
         <div class="invisible">
