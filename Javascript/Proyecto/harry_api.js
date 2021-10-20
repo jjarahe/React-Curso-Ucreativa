@@ -9,6 +9,7 @@ async function fecthCharacter() {
     console.log('API cargada', listOfCharacters)              
 }
 
+(fecthCharacter())();
 
 //Helper
 function getRandomInt(min,max) {
