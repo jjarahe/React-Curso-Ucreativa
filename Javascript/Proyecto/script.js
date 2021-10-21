@@ -1,7 +1,7 @@
 const anwersLetters = ["A","B","C","D"]
 const correctAnswers = []
 let fakeCharacters = []
-const numOfQuestion = 1
+const numOfQuestion = 10
 let playerName = ""
 const questions = ['Cual es actor que interpreta este personaje?','Como se llama el personaje?','Cual es la casa a la que pertenece?','Cual es su patronus?']
 let score = 0
@@ -158,9 +158,7 @@ function reviewForm(){
         let answer = document.querySelector(`input[name="respuesta-${i}"]:checked`)
         let correctAnswer = correctAnswers[i-1]
         let typeOfQuestion = document.querySelector(`label[for="${answer.id}"]`)//Agarro del label la propiedad form para poder traer el atributo del objeto para contar la respuesta correcta
-        console.log(typeOfQuestion.getAttribute("data-question-type"))
-        console.log(correctAnswer[typeOfQuestion.getAttribute("data-question-type")])
-        if(answer.value = correctAnswer[typeOfQuestion.getAttribute("data-question-type")]){
+        if(answer.value == correctAnswer[typeOfQuestion.getAttribute("data-question-type")]){
             score += 10
         }
     }
