@@ -17,8 +17,10 @@ function loadFakeCharacters() {
 function reviewForm(){
    for (let i = 1; i <= numOfQuestion; i++) {
        let answer = document.querySelector(`input[name="respuesta-${i}"]:checked`)
+       console.log(answer)
+       
        let correctAnswer = correctAnswers[i-1]
-       let typeOfQuestion = document.querySelector(`label[for="${answer.id}"]`)//Agarro del label la propiedad form para poder traer el atributo del objeto para contar la respuesta correcta
+       let typeOfQuestion = document.querySelector(`label[for=${answer.id}]`)//Agarro del label la propiedad form para poder traer el atributo del objeto para contar la respuesta correcta
        if(answer.value === correctAnswer[typeOfQuestion.form]){
            puntuacion += 10
        }
@@ -29,7 +31,7 @@ function reviewForm(){
 
 function createQuestion(numOfQuestion) {
 
-    const form = document.createElement("form")
+    const form = document.querySelector("form")
 
     for(let numQuestions = 1; numQuestions<= numOfQuestion; numQuestions++) {
         const character = listOfCharacters[getRandomInt(0,listOfCharacters.length)]
@@ -100,22 +102,25 @@ function createQuestion(numOfQuestion) {
         container.appendChild(card)
         form.appendChild(container)
     }
-    const div_boton = document.createElement("div")
-        div_boton.classList.add("card-body","d-flex","justify-content-center")
-            const buttonD = document.createElement("button")
-            buttonD.type = "submit"
-            buttonD.classList.add("btn","btn-primary")
-            buttonD.textContent = "Enviar Respuestas"
-            //buttonD.addEventListener("onclick",reviewForm())
-            div_boton.appendChild(buttonD)
-            form.appendChild(div_boton)
+    // const div_boton = document.createElement("div")
+    //     div_boton.classList.add("card-body","d-flex","justify-content-center")
+    //         const buttonD = document.createElement("button")
+    //         buttonD.type = "submit"
+    //         buttonD.classList.add("btn","btn-primary")
+    //         buttonD.textContent = "Enviar Respuestas"
+    //         //buttonD.addEventListener("onclick",reviewForm())
+    //         div_boton.appendChild(buttonD)
+    //         form.appendChild(div_boton)
      
-    const body = document.querySelector("body")
-    body.appendChild(form)
+    //const body = document.querySelector("body")
+    //body.appendChild(form)
 }
-            
-createQuestion(numOfQuestion)
 
 
-const boton = document.querySelector('button[type="submit"]')
-boton.onclick = reviewForm()
+(async function loadGame(){
+     await fecthCharacter()
+    createQuestion(numOfQuestion)
+})();
+
+const boton = document.querySelector('button')
+boton.addEventListener("onclick",reviewForm())
