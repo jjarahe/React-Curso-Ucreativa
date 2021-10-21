@@ -1,5 +1,3 @@
-
-
 const typeOfQuestions = ['actor','name','house','patronus']
 const questions = ['Cual es actor que interpreta este personaje?','Como se llama el personaje?','Cual es la casa a la que pertenece?','Cual es su patronus?'] 
 const correctAnswers = []
@@ -7,6 +5,7 @@ const anwersLetters = ["A","B","C","D"]
 let fakeCharacters = []
 let puntuacion = 0
 const nombreJugador = "Juan Jara"
+const numOfQuestion = 3
 
 function loadFakeCharacters() {
     fakeCharacters = []
@@ -15,10 +14,23 @@ function loadFakeCharacters() {
     }
 }
 
+function reviewForm(){
+   for (let i = 1; i <= numOfQuestion; i++) {
+       let answer = document.querySelector(`input[name="respuesta-${i}"]:checked`)
+       let correctAnswer = correctAnswers[i-1]
+       let typeOfQuestion = document.querySelector(`label[for="${answer.id}"]`)//Agarro del label la propiedad form para poder traer el atributo del objeto para contar la respuesta correcta
+       if(answer.value === correctAnswer[typeOfQuestion.form]){
+           puntuacion += 10
+       }
+   }
+   alert("La puntuacion Final es: "+ puntuacion)
+}
+
+
 function createQuestion(numOfQuestion) {
 
     const form = document.createElement("form")
-    
+
     for(let numQuestions = 1; numQuestions<= numOfQuestion; numQuestions++) {
         const character = listOfCharacters[getRandomInt(0,listOfCharacters.length)]
         correctAnswers.push(character)
@@ -73,8 +85,9 @@ function createQuestion(numOfQuestion) {
                     const label = document.createElement("label")
                     label.classList.add("form-check-label")
                     label.setAttribute('for',`respuesta-${anwersLetters[i]}-${numQuestions}`)
+                    label.setAttribute('form',`${typeOfQuestions[randomQuestion]}`)
                     label.textContent = `${answers[i][typeOfQuestions[randomQuestion]]}`    
-                    
+                  
                 li.appendChild(input)
                 li.appendChild(label)
                 ul.appendChild(li)
@@ -93,7 +106,7 @@ function createQuestion(numOfQuestion) {
             buttonD.type = "submit"
             buttonD.classList.add("btn","btn-primary")
             buttonD.textContent = "Enviar Respuestas"
-            //buttonD.setAttribute("onclick", alert("clicked"))
+            //buttonD.addEventListener("onclick",reviewForm())
             div_boton.appendChild(buttonD)
             form.appendChild(div_boton)
      
@@ -101,5 +114,8 @@ function createQuestion(numOfQuestion) {
     body.appendChild(form)
 }
             
-createQuestion(3)
-const boton = document.querySelector('input[type="submit"]')
+createQuestion(numOfQuestion)
+
+
+const boton = document.querySelector('button[type="submit"]')
+boton.onclick = reviewForm()
