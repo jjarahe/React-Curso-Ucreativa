@@ -1,23 +1,20 @@
-//http://hp-api.herokuapp.com/api/characters
-
 let listOfCharacters = []
 
+/**
+ * Load list of Characters from the API.
+ *
+ */
 async function fecthCharacter() {
     const response =  await fetch('http://hp-api.herokuapp.com/api/characters')
     const characters = await response.json()
-    listOfCharacters = characters.filter(elemento => elemento.name && elemento.image && elemento.patronus &&  elemento.house)
-    console.log('API cargada', listOfCharacters)              
+    listOfCharacters = characters.filter(elemento => elemento.name && elemento.image && elemento.patronus &&  elemento.house)           
 }
 
-//This method allow the function be loaded before the components are created.
-// (async function fecthCharacter() {
-//     const response =  await fetch('http://hp-api.herokuapp.com/api/characters')
-//     const characters = await response.json()
-//     listOfCharacters = characters.filter(elemento => elemento.name && elemento.image && elemento.patronus &&  elemento.house)
-//     console.log('API cargada', listOfCharacters)              
-// })();
 
-//Helper
+/**
+ * Helper to get a random number.
+ *
+ */
 function getRandomInt(min,max) {
     min = Math.ceil(min)
     max = Math.floor(max)

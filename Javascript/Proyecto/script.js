@@ -1,12 +1,43 @@
-const typeOfQuestions = ['actor','name','house','patronus']
-const questions = ['Cual es actor que interpreta este personaje?','Como se llama el personaje?','Cual es la casa a la que pertenece?','Cual es su patronus?'] 
-const correctAnswers = []
 const anwersLetters = ["A","B","C","D"]
+const correctAnswers = []
 let fakeCharacters = []
-let puntuacion = 0
-const nombreJugador = "Juan Jara"
-const numOfQuestion = 3
+const numOfQuestion = 1
+let playerName = ""
+const questions = ['Cual es actor que interpreta este personaje?','Como se llama el personaje?','Cual es la casa a la que pertenece?','Cual es su patronus?']
+let score = 0
+const typeOfQuestions = ['actor','name','house','patronus']
 
+const body = document.querySelector("body")
+
+
+/**
+ * Create navbar.
+ */
+function createNavBar(){
+    const navbar = document.createElement("nav")
+    navbar.classList.add("navbar", "navbar-dark", "bg-dark")
+    
+    const container = document.createElement("div")
+        container.classList.add("container")
+    const header = document.createElement("a")
+        header.classList.add("navbar-brand")
+        header.textContent = "Proyecto JS de Juan Jara / Profesor Esteban Solorzano"
+        
+    container.appendChild(header)    
+    navbar.appendChild(container)
+    
+    const title = document.createElement("h2")
+    title.classList.add("d-flex","justify-content-center","mt-3")
+    title.textContent = "Harry Potter Quiz"
+     
+    //let body = document.querySelector("body")
+    body.appendChild(navbar)
+    body.appendChild(title)
+}
+
+/**
+ * Load list of fake characters.
+ */
 function loadFakeCharacters() {
     fakeCharacters = []
     for (let i = 0; i < listOfCharacters.length; i++) {
@@ -14,34 +45,23 @@ function loadFakeCharacters() {
     }
 }
 
-function reviewForm(){
-   for (let i = 1; i <= numOfQuestion; i++) {
-       let answer = document.querySelector(`input[name="respuesta-${i}"]:checked`)
-       console.log(answer)
-       
-       let correctAnswer = correctAnswers[i-1]
-       let typeOfQuestion = document.querySelector(`label[for=${answer.id}]`)//Agarro del label la propiedad form para poder traer el atributo del objeto para contar la respuesta correcta
-       if(answer.value === correctAnswer[typeOfQuestion.form]){
-           puntuacion += 10
-       }
-   }
-   alert("La puntuacion Final es: "+ puntuacion)
-}
-
-
+/**
+ * Create dynamic questions.
+ *
+ * @param {int} numOfQuestion This is a param with the numbers of questions to create.
+ *     one line.
+*
+ */
 function createQuestion(numOfQuestion) {
-
-    const form = document.querySelector("form")
-
+    const form = document.createElement("form")
+    
     for(let numQuestions = 1; numQuestions<= numOfQuestion; numQuestions++) {
         const character = listOfCharacters[getRandomInt(0,listOfCharacters.length)]
         correctAnswers.push(character)
         loadFakeCharacters()
         let filteredCharacters = [...new Set(fakeCharacters)]
         filteredCharacters.splice(3,filteredCharacters.length, character)
-        //filteredCharacters.push(character)
-        console.log(filteredCharacters)
-        
+
         let answers = filteredCharacters.map((value)=> ({ value, sort: Math.random()})).sort((a, b) => a.sort - b.sort).map(({value}) => value )
         
         const randomQuestion = getRandomInt(0,typeOfQuestions.length)
@@ -87,7 +107,7 @@ function createQuestion(numOfQuestion) {
                     const label = document.createElement("label")
                     label.classList.add("form-check-label")
                     label.setAttribute('for',`respuesta-${anwersLetters[i]}-${numQuestions}`)
-                    label.setAttribute('form',`${typeOfQuestions[randomQuestion]}`)
+                    label.setAttribute('data-question-type',`${typeOfQuestions[randomQuestion]}`)
                     label.textContent = `${answers[i][typeOfQuestions[randomQuestion]]}`    
                   
                 li.appendChild(input)
@@ -101,26 +121,48 @@ function createQuestion(numOfQuestion) {
  
         container.appendChild(card)
         form.appendChild(container)
+        
     }
-    // const div_boton = document.createElement("div")
-    //     div_boton.classList.add("card-body","d-flex","justify-content-center")
-    //         const buttonD = document.createElement("button")
-    //         buttonD.type = "submit"
-    //         buttonD.classList.add("btn","btn-primary")
-    //         buttonD.textContent = "Enviar Respuestas"
-    //         //buttonD.addEventListener("onclick",reviewForm())
-    //         div_boton.appendChild(buttonD)
-    //         form.appendChild(div_boton)
+    
+    const div_boton = document.createElement("div")
+        div_boton.classList.add("card-body","d-flex","justify-content-center")
+            const buttonD = document.createElement("button")
+            buttonD.classList.add("btn","btn-primary")
+            buttonD.textContent = "Enviar Respuestas"
+            buttonD.onclick =  reviewForm
+            div_boton.appendChild(buttonD)
+            form.appendChild(div_boton)
      
-    //const body = document.querySelector("body")
-    //body.appendChild(form)
+
+    body.appendChild(form)
 }
 
-
+/**
+ * IIFE function to be excecuted when the page is being loaded and have all the setup ready.
+ *
+ */
 (async function loadGame(){
-     await fecthCharacter()
+    await fecthCharacter()
+    createNavBar()
     createQuestion(numOfQuestion)
 })();
 
-const boton = document.querySelector('button')
-boton.addEventListener("onclick",reviewForm())
+
+/**
+ * Calculate the score of the questions.
+ *
+ */
+function reviewForm(){
+    playerName = prompt("Digite el nombre del jugador: ")
+    for (let i = 1; i <= numOfQuestion; i++) {
+        let answer = document.querySelector(`input[name="respuesta-${i}"]:checked`)
+        let correctAnswer = correctAnswers[i-1]
+        let typeOfQuestion = document.querySelector(`label[for="${answer.id}"]`)//Agarro del label la propiedad form para poder traer el atributo del objeto para contar la respuesta correcta
+        console.log(typeOfQuestion.getAttribute("data-question-type"))
+        console.log(correctAnswer[typeOfQuestion.getAttribute("data-question-type")])
+        if(answer.value = correctAnswer[typeOfQuestion.getAttribute("data-question-type")]){
+            score += 10
+        }
+    }
+    alert(`${playerName} su puntuacion Final es: ${score}`)
+ }
