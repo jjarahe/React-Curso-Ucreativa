@@ -154,6 +154,7 @@ function createQuestion(numOfQuestion) {
  *
  */
 function reviewForm(){
+    score = 0
     for (let i = 1; i <= numOfQuestion; i++) {
         let answer = document.querySelector(`input[name="respuesta-${i}"]:checked`)
         let correctAnswer = correctAnswers[i-1]
