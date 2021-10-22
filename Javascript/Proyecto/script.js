@@ -30,7 +30,6 @@ function createNavBar(){
     title.classList.add("d-flex","justify-content-center","mt-3")
     title.textContent = "Harry Potter Quiz"
      
-    //let body = document.querySelector("body")
     body.appendChild(navbar)
     body.appendChild(title)
 }
@@ -104,6 +103,8 @@ function createQuestion(numOfQuestion) {
                     input.name = `respuesta-${numQuestions}`
                     input.id = `respuesta-${anwersLetters[i]}-${numQuestions}`
                     input.value = `${answers[i][typeOfQuestions[randomQuestion]]}`
+                    input.required = true
+
                     const label = document.createElement("label")
                     label.classList.add("form-check-label")
                     label.setAttribute('for',`respuesta-${anwersLetters[i]}-${numQuestions}`)
@@ -153,7 +154,6 @@ function createQuestion(numOfQuestion) {
  *
  */
 function reviewForm(){
-    playerName = prompt("Digite el nombre del jugador: ")
     for (let i = 1; i <= numOfQuestion; i++) {
         let answer = document.querySelector(`input[name="respuesta-${i}"]:checked`)
         let correctAnswer = correctAnswers[i-1]
@@ -162,5 +162,6 @@ function reviewForm(){
             score += 10
         }
     }
+    playerName = prompt("Digite el nombre del jugador: ")
     alert(`${playerName} su puntuacion Final es: ${score}`)
  }
