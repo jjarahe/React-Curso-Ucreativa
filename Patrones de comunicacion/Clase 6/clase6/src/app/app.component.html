@@ -8,6 +8,13 @@
 <br><br>
 <input type="date" placeholder="date" [(ngModel)] = "dateCreated" />
 <br><br>
+<select matNativeControl [(ngModel)]="country" name="country">
+  <option value="" selected></option>
+  <option *ngFor="let country of countries" [value]="country">
+      {{country}}
+  </option>
+</select>
+<br><br>
 <button type="button" (click) = "registerNewUser()" >Registrar</button>
 
 <div class="table-header">
@@ -17,6 +24,7 @@
   <label>Email</label>
   <label>Age</label>
   <label>isOlder</label>
+  <label>Country</label>
   <label>Date Created</label>
 </div>
 
@@ -28,6 +36,7 @@
   <label>{{user.edad}}</label>
   <label *ngIf="user.edad > 17 ">Usuario es mayor de edad</label>
   <label *ngIf="user.edad < 19 ">Usuario es menor de edad</label>
+  <label>{{user.country}}</label>
   <label>{{user.dateCreated | date:'dd-MM-yyyy' }}</label>
 </div>
 

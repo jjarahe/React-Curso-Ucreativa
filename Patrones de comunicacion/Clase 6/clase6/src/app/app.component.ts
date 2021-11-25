@@ -13,6 +13,8 @@ export class AppComponent {
   public email: string = '';
   public dateCreated: Date = new Date();
   public edad: Number = 0;
+  public countries: string[] = ['Costa Rica','Panama','Colombia','Estados Unidos','Nicaragua','El Salvador'];
+  public country: string = '';
 
   public users: Array<User> = [];
 
@@ -26,7 +28,8 @@ export class AppComponent {
       password: this.password,
       email: this.email,
       dateCreated: this.dateCreated,
-      edad: this.edad
+      edad: this.edad,
+      country: this.country
     }
     alert('Usuario agregado exitosamente!');
     this.users.push(user);
