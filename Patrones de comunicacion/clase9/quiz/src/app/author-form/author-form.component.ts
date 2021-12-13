@@ -25,7 +25,6 @@ export class AuthorFormComponent implements OnInit {
     id: '',
     favoriteGenre: '',
     birthdate: new Date(),
-    books: new Array<AuthorNameSpace.Book>()
   }
 
   onSubmit(){
