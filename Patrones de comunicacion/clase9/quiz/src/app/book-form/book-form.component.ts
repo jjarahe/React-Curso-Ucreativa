@@ -10,6 +10,15 @@ import { AuthorService } from '../author.service';
 })
 export class BookFormComponent implements OnInit {
 
+  public author: AuthorNameSpace.Author = {
+    name: '',
+    lastname: '',
+    id: '',
+    favoriteGenre: '',
+    birthdate: new Date(),
+    books: new Array<AuthorNameSpace.Book>()
+  }
+
   public authorID: string = '';
 
   public book: AuthorNameSpace.Book = {
@@ -21,43 +30,11 @@ export class BookFormComponent implements OnInit {
   public authors: Array<AuthorNameSpace.Author> = []
 
 
-  public onSubmit(authorID: string){
-    console.log("AuthorID: "+ authorID)
-
-
-          this.authors.find((obj, index) => {
-            if(obj.id == authorID){
-               obj.Books?.push({...this.book})
-            }
-         }
-         )
-
-     /*
-
-     this.authors.forEach(author => {
-                                     if(author.id == authorID){
-                                       console.log("Este es el autor del foreach: "+ JSON.stringify(author))
-                                       author.Books?.push({...this.book})
-                                       console.log(JSON.stringify(author.Books))
-                                     }
-                                    }
-                          )
-
-
-     let index: number;
-    if(this.authors.find(obj => obj.id == authorID)){
-      index = this.authors.indexOf(this.authors.find(obj => obj.id == authorID))
-    }
-
-    console.log("INDEX: "+ index)
-    this.author = this.authors.find(obj => obj.id === authorID)
-    this.author?.Books?.push(this.book)
-
-
-    */
-   alert("Se registro el Libro!")
-   console.log(this.book)
-   console.log(this.authors)
+  public onSubmit(){
+    console.log("Author Antes del Book: "+ JSON.stringify(this.authors,null,4))
+    this.authors.find((obj) => obj.id == this.authorID)?.books.push(this.book);
+    alert("Se registro el Libro!");
+    console.log(JSON.stringify(this.authors,null,4));
 
 }
 

@@ -5,7 +5,7 @@ export namespace AuthorNameSpace{
     id: string;
     birthdate: Date;
     favoriteGenre: string;
-    Books?: Array<Book>;
+    books: Array<AuthorNameSpace.Book>;
   }
 
   export interface Book {
