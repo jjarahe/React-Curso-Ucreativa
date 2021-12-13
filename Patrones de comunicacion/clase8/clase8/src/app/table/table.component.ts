@@ -24,7 +24,7 @@ export class TableComponent implements OnInit {
   }
 
   constructor(private _restaurantService: RestaurantService) {
-    this.restaurants = this._restaurantService.restaurants
+    this.restaurants = this._restaurantService.restaurants;
    }
 
   ngOnInit(): void {

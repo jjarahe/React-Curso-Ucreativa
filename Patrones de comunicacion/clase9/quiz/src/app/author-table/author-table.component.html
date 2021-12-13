@@ -1,0 +1,20 @@
+<div class="table-header">
+  <label for="">#</label>
+  <label for="">Nombre</label>
+  <label for="">Apellidos</label>
+  <label for="">ID</label>
+  <label for="">Fecha de Nacimiento</label>
+  <label for="">Genero</label>
+  <label for="">Acciones</label>
+</div>
+
+<div *ngFor="let author of authors; let i = index" class="table-row">
+    <label for="">{{i+1}}</label>
+    <label for="">{{author.name}}</label>
+    <label for="">{{author.lastname}}</label>
+    <label for="">{{author.id}}</label>
+    <label for="">{{author.birthdate | date: 'yyyy/MM/dd'}}</label>
+    <label for="">{{author.favoriteGenre}}</label>
+    <button>Ver Libros</button>
+
+</div>
