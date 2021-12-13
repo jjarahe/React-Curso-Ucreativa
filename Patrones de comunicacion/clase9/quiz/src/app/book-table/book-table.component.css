@@ -1,0 +1,29 @@
+.table-header {
+  padding: 20px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+.table-row {
+  padding: 10px;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+h3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+div button {
+  margin: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}

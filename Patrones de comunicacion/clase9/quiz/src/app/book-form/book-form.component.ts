@@ -2,6 +2,7 @@ import { CompileShallowModuleMetadata } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { AuthorNameSpace } from '../author.namespace';
 import { AuthorService } from '../author.service';
+import { Genre } from '../genre.interface';
 
 @Component({
   selector: 'app-book-form',
@@ -10,16 +11,16 @@ import { AuthorService } from '../author.service';
 })
 export class BookFormComponent implements OnInit {
 
-  public author: AuthorNameSpace.Author = {
-    name: '',
-    lastname: '',
-    id: '',
-    favoriteGenre: '',
-    birthdate: new Date(),
-    books: new Array<AuthorNameSpace.Book>()
-  }
-
   public authorID: string = '';
+
+  public genres: Genre[] = [{name:'Crimen'},
+  {name:'Religion'},
+  {name:'Misterio'},
+  {name:'Motivacion Personal'},
+  {name:'Ciencia Ficcion'},
+  {name:'Fantasia'},
+  {name:'Terror'},
+];
 
   public book: AuthorNameSpace.Book = {
     name: '',
