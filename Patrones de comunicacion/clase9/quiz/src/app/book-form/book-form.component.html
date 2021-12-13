@@ -11,7 +11,7 @@
 <br><br>
 <select [(ngModel)]="authorID" *ngIf="authors.length > 0" name="Authors">
   <option value="" selected>Seleccione el Autor</option>
-  <option *ngFor="let author of authors" [ngValue]="author.id">
+  <option *ngFor="let author of authors" [value]="author.id">
       {{author.name}}
   </option>
 </select>

@@ -10,9 +10,11 @@ import { AuthorService } from '../author.service';
 export class AuthorTableComponent implements OnInit {
 
   public authors: Array<AuthorNameSpace.Author> = [];
-  public authorIndex: number = -1;
+  public authorIndex?: number;
+  public showBooksTable: boolean = false;
   public authorName: string = '';
   public books: Array<AuthorNameSpace.Book> = [];
+
 
   public showBooks(index: number){
     this.authorIndex = index;
@@ -23,6 +25,7 @@ export class AuthorTableComponent implements OnInit {
 
 
   constructor(private _authorService: AuthorService) {
+    this.showBooksTable = false;
     this.authors = this._authorService.authors;
    }
 

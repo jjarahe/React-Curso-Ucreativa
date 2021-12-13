@@ -30,10 +30,22 @@ export class BookFormComponent implements OnInit {
 
   public authors: Array<AuthorNameSpace.Author> = []
 
+  public index: number = 0
 
   public onSubmit(){
     console.log("Author Antes del Book: "+ JSON.stringify(this.authors,null,4))
-    this.authors.find((obj) => obj.id == this.authorID)?.books.push(this.book);
+    console.log("Author ID*******: "+this.authorID)
+    console.log("Este es el objeto encontrado *************************"+JSON.stringify(this.authors.find(obj => obj.id == this.authorID)))
+
+    this.index = this.authors.findIndex( obj => obj.id == this.authorID)
+    console.log("********************INDEX****************"+this.index)
+
+    this.authors[this.index].books.
+    /*this.authors.find(({id}, index) => {
+      if(id === this.authorID){
+        this.authors[index].books.push({...this.book})
+      }
+    })*/
     alert("Se registro el Libro!");
     console.log(JSON.stringify(this.authors,null,4));
 
