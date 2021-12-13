@@ -1,0 +1,19 @@
+<div class="table-header">
+  <label for="">#</label>
+  <label for="">Nombre</label>
+  <label for=""># Cuenta</label>
+  <label for="">$ Cuenta</label>
+  <label for="">Estado</label>
+  <label for="">Acciones</label>
+</div>
+<div *ngFor="let user of users, let i = index" class="table-row">
+  <label for="">{{ i + 1}}</label>
+  <label for="">{{ user.name }}</label>
+  <label for="">{{ user.accoutNumber }}</label>
+  <label for="">{{ user.amount | currency : 'USD' : 'symbol' : '1.2-2'}}</label>
+  <label for="">{{ user.status | accountStatusPipe }}</label>
+  <div>
+    <button (click)="changeAccountStatus(i,status.OPENED)">OPEN</button>
+    <button (click)="changeAccountStatus(i,status.CLOSED)">CLOSED</button>
+  </div>
+</div>

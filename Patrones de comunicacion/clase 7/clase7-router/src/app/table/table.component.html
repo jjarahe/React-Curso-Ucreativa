@@ -1,0 +1,14 @@
+<div class="table-header">
+  <label for="">#</label>
+  <label for="">Nombre</label>
+  <label for=""># Cuenta</label>
+  <label for="">$ Cuenta</label>
+  <label for="">Estado</label>
+</div>
+<div *ngFor="let user of users, let i = index" class="table-row">
+  <label for="">{{ i + 1}}</label>
+  <label for="">{{ user.name }}</label>
+  <label for="">{{ user.accoutNumber }}</label>
+  <label for="">{{ user.amount }}</label>
+  <label for="">{{ user.status }}</label>
+</div>

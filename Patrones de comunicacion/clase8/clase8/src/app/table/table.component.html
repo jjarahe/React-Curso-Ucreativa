@@ -1,0 +1,29 @@
+<div class="table-header">
+  <label for="">#</label>
+  <label for="">Nombre</label>
+  <label for="">Direccion</label>
+  <label for="">Estrellas</label>
+  <label for="">Fecha Creada</label>
+  <label for="">Estado</label>
+  <label for="">Acciones</label>
+  <label for="">Eliminar</label>
+</div>
+
+<div *ngFor="let restaurant of restaurants; let i = index">
+  <div *ngIf="!restaurant.isDeleted" class="table-row">
+    <label for="">{{i+1}}</label>
+    <label for="">{{restaurant.name}}</label>
+    <label for="">{{restaurant.address}}</label>
+    <label for="">{{restaurant.stars}}</label>
+    <label for="">{{restaurant.dateCreated | date: 'yyyy/MM/dd'}}</label>
+    <label for="">{{restaurant.status}}</label>
+    <div>
+      <button (click)="changeRestaurantStatus(i,status.OPENED)">Abierto</button>
+      <button (click)="changeRestaurantStatus(i,status.CLOSED)">Cerrado</button>
+    </div>
+    <div>
+      <button (click)="deleteRestaurant(i,true)">Eliminar</button>
+    </div>
+  </div>
+
+</div>
