@@ -13,21 +13,25 @@ export class AuthorTableComponent implements OnInit {
   public authorIndex?: number;
 
   public authorName: string = '';
-  public books: Array<AuthorNameSpace.Book> = new Array<AuthorNameSpace.Book>();
+  public id: string = '';
+  public books: Array<AuthorNameSpace.Book> = [];
+  public authorBooks?: Array<AuthorNameSpace.Book> = [];
 
 
-  public showBooks(index: number){
+  public showBooks(index: number) {
     this.authorIndex = index;
+    this.id = this.authors[index].id
     this.authorName = this.authors[index].name
-    this.books = this.authors[index].books
-    console.log("Este es el INDEX: "+ this.authorIndex)
+    this.authorBooks = this.books.filter(obj => obj.idAuthor == this.id)
+    console.log("Este es el INDEX: " + this.authorIndex)
   }
 
 
-  constructor(private _authorService: AuthorService) {
+  constructor(private _authorService: AuthorService, private _bookService: AuthorService) {
 
+    this.books = this._bookService.books
     this.authors = this._authorService.authors;
-   }
+  }
 
   ngOnInit(): void {
   }

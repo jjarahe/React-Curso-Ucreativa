@@ -10,7 +10,6 @@ import { Genre } from '../genre.interface';
 })
 export class BookFormComponent implements OnInit {
 
-  public authorID: string = '';
 
   public genres: Genre[] = [{name:'Crimen'},
   {name:'Religion'},
@@ -24,41 +23,26 @@ export class BookFormComponent implements OnInit {
   public book: AuthorNameSpace.Book = {
     name: '',
     year: 0,
-    bookGenre: ''
+    bookGenre: '',
+    idAuthor: '',
   }
+  public books: Array<AuthorNameSpace.Book> = []
 
   public authors: Array<AuthorNameSpace.Author> = []
+
 
   public index: number = 0
 
   public onSubmit(){
-    console.log("Author Antes del Book: "+ JSON.stringify(this._authorService.authors,null,4))
-    console.log("Author ID*******: "+this.authorID)
-    console.log("Este es el objeto encontrado *************************"+JSON.stringify(this._authorService.authors.find(obj => obj.id == this.authorID)))
-
-    const author = this._authorService.authors.find( obj => obj.id == this.authorID)
-
-    if(author) {
-      author.books.push({...this.book})
-      console.log("AQUIII")
-    }
-/*
-    this.index = this._authorService.authors.findIndex( obj => obj.id === this.authorID)
-    console.log("********************INDEX****************"+this.index)
-
-    this._authorService.authors[this.index].books.push({...this.book})*/
-    /*this.authors.find(({id}, index) => {
-      if(id === this.authorID){
-        this.authors[index].books.push({...this.book})
-      }
-    })*/
+    this.books.push({...this.book})
     alert("Se registro el Libro!");
     console.log(JSON.stringify(this._authorService.authors,null,4));
 
 }
 
-  constructor(private _authorService: AuthorService) {
+  constructor(private _authorService: AuthorService, private _bookService: AuthorService) {
     this.authors = _authorService.authors
+    this.books = _bookService.books
   }
 
   ngOnInit(): void {
