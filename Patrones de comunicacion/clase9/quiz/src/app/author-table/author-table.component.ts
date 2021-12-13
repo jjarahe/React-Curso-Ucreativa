@@ -11,9 +11,9 @@ export class AuthorTableComponent implements OnInit {
 
   public authors: Array<AuthorNameSpace.Author> = [];
   public authorIndex?: number;
-  public showBooksTable: boolean = false;
+
   public authorName: string = '';
-  public books: Array<AuthorNameSpace.Book> = [];
+  public books: Array<AuthorNameSpace.Book> = new Array<AuthorNameSpace.Book>();
 
 
   public showBooks(index: number){
@@ -25,7 +25,7 @@ export class AuthorTableComponent implements OnInit {
 
 
   constructor(private _authorService: AuthorService) {
-    this.showBooksTable = false;
+
     this.authors = this._authorService.authors;
    }
 

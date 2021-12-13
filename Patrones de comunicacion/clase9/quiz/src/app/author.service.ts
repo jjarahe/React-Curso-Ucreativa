@@ -7,7 +7,6 @@ import { AuthorNameSpace } from './author.namespace';
 export class AuthorService {
 
   public authors: Array<AuthorNameSpace.Author> = []
-  public index: number = -1
 
   constructor() { }
 

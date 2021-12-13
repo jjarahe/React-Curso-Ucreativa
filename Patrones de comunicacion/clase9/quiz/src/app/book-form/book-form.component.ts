@@ -1,4 +1,3 @@
-import { CompileShallowModuleMetadata } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { AuthorNameSpace } from '../author.namespace';
 import { AuthorService } from '../author.service';
@@ -33,27 +32,34 @@ export class BookFormComponent implements OnInit {
   public index: number = 0
 
   public onSubmit(){
-    console.log("Author Antes del Book: "+ JSON.stringify(this.authors,null,4))
+    console.log("Author Antes del Book: "+ JSON.stringify(this._authorService.authors,null,4))
     console.log("Author ID*******: "+this.authorID)
-    console.log("Este es el objeto encontrado *************************"+JSON.stringify(this.authors.find(obj => obj.id == this.authorID)))
+    console.log("Este es el objeto encontrado *************************"+JSON.stringify(this._authorService.authors.find(obj => obj.id == this.authorID)))
 
-    this.index = this.authors.findIndex( obj => obj.id == this.authorID)
+    const author = this._authorService.authors.find( obj => obj.id == this.authorID)
+
+    if(author) {
+      author.books.push({...this.book})
+      console.log("AQUIII")
+    }
+/*
+    this.index = this._authorService.authors.findIndex( obj => obj.id === this.authorID)
     console.log("********************INDEX****************"+this.index)
 
-    this.authors[this.index].books.
+    this._authorService.authors[this.index].books.push({...this.book})*/
     /*this.authors.find(({id}, index) => {
       if(id === this.authorID){
         this.authors[index].books.push({...this.book})
       }
     })*/
     alert("Se registro el Libro!");
-    console.log(JSON.stringify(this.authors,null,4));
+    console.log(JSON.stringify(this._authorService.authors,null,4));
 
 }
 
   constructor(private _authorService: AuthorService) {
-    this.authors = this._authorService.authors;
-   }
+    this.authors = _authorService.authors
+  }
 
   ngOnInit(): void {
   }

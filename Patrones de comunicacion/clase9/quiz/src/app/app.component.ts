@@ -7,7 +7,6 @@ import { AuthorService } from './author.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'quiz';
 
   constructor() {
   }
