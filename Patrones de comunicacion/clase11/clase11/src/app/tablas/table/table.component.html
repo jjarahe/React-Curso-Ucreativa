@@ -1,0 +1,13 @@
+<div class="table-header">
+  <label for="">#</label>
+  <label for="">Nombre</label>
+  <label for="">Edad</label>
+  <label for="">Fecha Creacion</label>
+</div>
+
+<div class="table-row" *ngFor="let user of users; let i = index;">
+  <label for="">{{i+1}}</label>
+  <label for="">{{user.name}}</label>
+  <label for="">{{user.age}}</label>
+  <label for="">{{user.dateCreated}}</label>
+</div>
