@@ -10,26 +10,22 @@ import { AuthorService } from '../author.service';
 export class AuthorTableComponent implements OnInit {
 
   public authors: Array<AuthorNameSpace.Author> = [];
-  public authorIndex?: number;
 
-  public authorName: string = '';
-  public id: string = '';
-  public books: Array<AuthorNameSpace.Book> = [];
-  public authorBooks?: Array<AuthorNameSpace.Book> = [];
+  public authorSelected: AuthorNameSpace.Author = {
+    books: []
+  }
 
-
-  public showBooks(index: number) {
-    this.authorIndex = index;
+  public showBooks(author: AuthorNameSpace.Author) {
+    this.authorSelected = author;
+    /*this.authorIndex = index;
     this.id = this.authors[index].id
     this.authorName = this.authors[index].name
     this.authorBooks = this.books.filter(obj => obj.idAuthor == this.id)
-    console.log("Este es el INDEX: " + this.authorIndex)
+    console.log("Este es el INDEX: " + this.authorIndex)*/
   }
 
 
   constructor(private _authorService: AuthorService, private _bookService: AuthorService) {
-
-    this.books = this._bookService.books
     this.authors = this._authorService.authors;
   }
 

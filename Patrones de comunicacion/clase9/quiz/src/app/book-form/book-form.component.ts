@@ -20,6 +20,7 @@ export class BookFormComponent implements OnInit {
   {name:'Terror'},
 ];
 
+
   public book: AuthorNameSpace.Book = {
     name: '',
     year: 0,
@@ -34,11 +35,16 @@ export class BookFormComponent implements OnInit {
   public index: number = 0
 
   public onSubmit(){
+    console.log(this.book)
     this.books.push({...this.book})
     alert("Se registro el Libro!");
     console.log(JSON.stringify(this._authorService.authors,null,4));
+    this.registerAuthorBook();
+  }
 
-}
+  private registerAuthorBook(){
+    this._authorService.authors[this.index].books?.push({...this.book})
+  }
 
   constructor(private _authorService: AuthorService, private _bookService: AuthorService) {
     this.authors = _authorService.authors

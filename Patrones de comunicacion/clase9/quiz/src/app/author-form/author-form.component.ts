@@ -10,7 +10,7 @@ import { Genre } from '../genre.interface';
 })
 export class AuthorFormComponent implements OnInit {
 
-  public genres: Genre[] = [{name:'Crimen'},
+  public genres: Array<Genre> = [{name:'Crimen'},
                             {name:'Religion'},
                             {name:'Misterio'},
                             {name:'Motivacion Personal'},
@@ -25,12 +25,26 @@ export class AuthorFormComponent implements OnInit {
     id: '',
     favoriteGenre: '',
     birthdate: new Date(),
-  }
+    books: [],
+  };
 
   onSubmit(){
     this._authorService.authors.push({...this.author});
-    console.log(this._authorService.authors)
-    alert("Se ha creado un nuevo Autor!")
+    console.log(this.author);
+    console.log(this._authorService.authors);
+    alert("Se ha creado un nuevo Autor!");
+    this.resetAuthor()
+  }
+
+  private resetAuthor(){
+    this.author = {
+      name: '',
+      lastname: '',
+      id: '',
+      favoriteGenre: '',
+      birthdate: new Date(),
+      books: [],
+    }
   }
 
   constructor(private _authorService: AuthorService) { }

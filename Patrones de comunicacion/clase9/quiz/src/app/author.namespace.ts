@@ -1,10 +1,11 @@
 export namespace AuthorNameSpace{
   export interface Author {
-    name: string;
-    lastname: string;
-    id: string;
-    birthdate: Date;
-    favoriteGenre: string;
+    name?: string;
+    lastname?: string;
+    id?: string;
+    birthdate?: Date;
+    favoriteGenre?: string;
+    books?: Array<Book>;
   }
 
   export interface Book {
