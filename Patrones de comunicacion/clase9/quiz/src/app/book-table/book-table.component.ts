@@ -10,10 +10,13 @@ import { AuthorService } from '../author.service';
 })
 export class BookTableComponent implements OnInit {
 
-  @Input() authorSelected: AuthorNameSpace.Author = {};
-  public books?: Array<AuthorNameSpace.Book> = this.authorSelected.books;
-  //@Input() books?: Array<AuthorNameSpace.Book> = [];
-  public authorName?: string = this.authorSelected.name;
+  @Input() authorName?: string = '';
+  @Input() books?: Array<AuthorNameSpace.Book> = [];
+
+  //public books?: Array<AuthorNameSpace.Book> = this.authorSelected.books;
+
+  //public authorName?: string = this.authorSelected.name;
+
 
   //Todo lo de abajo es mi codigo
 /*
@@ -30,6 +33,7 @@ export class BookTableComponent implements OnInit {
       this.index = _authorService.index;*//*
   }*/
   constructor() {}
+
   ngOnInit(): void {
   }
 

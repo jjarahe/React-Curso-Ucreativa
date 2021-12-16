@@ -12,11 +12,13 @@ export class AuthorTableComponent implements OnInit {
   public authors: Array<AuthorNameSpace.Author> = [];
 
   public authorSelected: AuthorNameSpace.Author = {
+    name: '',
     books: []
   }
 
   public showBooks(author: AuthorNameSpace.Author) {
     this.authorSelected = author;
+    console.log("Author selected*********************************"+JSON.stringify(this.authorSelected,null,4))
     /*this.authorIndex = index;
     this.id = this.authors[index].id
     this.authorName = this.authors[index].name
