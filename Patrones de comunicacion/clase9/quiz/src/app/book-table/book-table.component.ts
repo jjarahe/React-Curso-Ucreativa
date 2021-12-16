@@ -10,8 +10,11 @@ import { AuthorService } from '../author.service';
 })
 export class BookTableComponent implements OnInit {
 
-  @Input() books?: Array<AuthorNameSpace.Book> = [];
-  public authorName: string = 'Juan cambiar en la tabla';
+  @Input() authorSelected: AuthorNameSpace.Author = {};
+  public books?: Array<AuthorNameSpace.Book> = this.authorSelected.books;
+  //@Input() books?: Array<AuthorNameSpace.Book> = [];
+  public authorName?: string = this.authorSelected.name;
+
   //Todo lo de abajo es mi codigo
 /*
   public authors: Array<AuthorNameSpace.Author> = [];
