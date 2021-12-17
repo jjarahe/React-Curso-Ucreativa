@@ -25,9 +25,11 @@ export class LoginComponent implements OnInit {
     this.userFound = this._userService.users.filter(obj => obj.username == this.user.username && obj.password == this.user.password)[0]
     if(this.userFound){
       console.log(`Usuario logueado con exito! Username: ${this.user.username} Password: ${this.user.password}`)
+      alert("Usuario autenticado exitosamente!");
       return;
     }
     console.log(`Usuario incorrecto! Username: ${this.user.username} Password: ${this.user.password}`)
+    alert("Verifique su usuario o contrasena, ya que alguno es incorrecto!");
   }
 
 
