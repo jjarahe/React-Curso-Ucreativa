@@ -32,6 +32,7 @@ export class BookFormComponent implements OnInit {
     console.log(`*************Libro por Guardar************* ${this.book}`);
     this.registerBookIntoAuthor()
     console.log(`Libro ${this.book.name} se registro correctamente en el author ${this._authorService.authors[this.index].name}`)
+    alert(`El libro se registro correctamente al autor ${this._authorService.authors[this.index].name}!`)
   }
 
   private registerBookIntoAuthor(){

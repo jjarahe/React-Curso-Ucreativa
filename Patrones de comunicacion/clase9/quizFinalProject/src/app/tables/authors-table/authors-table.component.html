@@ -1,28 +1,34 @@
-<h3>Datos de los Autores</h3>
-<div class="table-header">
-  <label for="">#</label>
-  <label for="">Nombre</label>
-  <label for="">Apellidos</label>
-  <label for="">ID</label>
-  <label for="">Fecha de Nacimiento</label>
-  <label for="">Genero</label>
-  <label for="">Cantidad de Libros</label>
-  <label for="">Acciones</label>
+<div class="container">
+  <h3>Datos de los Autores</h3>
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellidos</th>
+        <th scope="col">ID</th>
+        <th scope="col">Fecha de Nacimiento</th>
+        <th scope="col">Genero</th>
+        <th scope="col">Cantidad de Libros</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let author of authorsStored; let i = index">
+        <th scope="row">{{i+1}}</th>
+        <td>{{author.name}}</td>
+        <td>{{author.lastName}}</td>
+        <td>{{author.id}}</td>
+        <td>{{author.birthdate | date: 'yyyy/MM/dd'}}</td>
+        <td>{{author.favoriteGenre}}</td>
+        <td>{{author.books?.length}}</td>
+        <td> <button (click)="showBooks(author)" class="btn btn-success">Ver Libros</button></td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <app-books-table [books]="authorSelected.books" [authorName]="authorSelected.name"></app-books-table>
 </div>
 
-<div *ngFor="let author of authorsStored; let i = index" class="table-row">
-    <label for="">{{i+1}}</label>
-    <label for="">{{author.name}}</label>
-    <label for="">{{author.lastName}}</label>
-    <label for="">{{author.id}}</label>
-    <label for="">{{author.birthdate | date: 'yyyy/MM/dd'}}</label>
-    <label for="">{{author.favoriteGenre}}</label>
-    <label for="">{{author.books?.length}}</label>
-    <button (click)="showBooks(author)">Ver Libros</button>
-
-</div>
-
-<br>
-
-<app-books-table [books]="authorSelected.books" [authorName]="authorSelected.name"></app-books-table>
 <!--<app-book-table [authorSelected]="authorSelected"></app-book-table> <!--El entre corchetes es la propiedad del hijo y el entre comillas es la propiedad del padre-->
