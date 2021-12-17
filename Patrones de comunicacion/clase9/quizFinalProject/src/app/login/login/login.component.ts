@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { DataNameSpace } from 'src/app/data.namespace';
 import { DataService } from 'src/app/data.service';
 
@@ -21,11 +22,14 @@ export class LoginComponent implements OnInit {
     password:''
   };
 
+
+
   public onSubmit(){
     this.userFound = this._userService.users.filter(obj => obj.username == this.user.username && obj.password == this.user.password)[0]
     if(this.userFound){
       console.log(`Usuario logueado con exito! Username: ${this.user.username} Password: ${this.user.password}`)
       alert("Usuario autenticado exitosamente!");
+      this.router.navigate(['/dashboard'])
       return;
     }
     console.log(`Usuario incorrecto! Username: ${this.user.username} Password: ${this.user.password}`)
@@ -33,7 +37,7 @@ export class LoginComponent implements OnInit {
   }
 
 
-  constructor(private _userService: DataService) {
+  constructor(private _userService: DataService, private router: Router) {
     this.registeredUsers = _userService.users
   }
 
