@@ -1,0 +1,14 @@
+<h3>Libros del Author: {{authorName}}</h3>
+<div class="table-header">
+  <label for="">#</label>
+  <label for="">Nombre</label>
+  <label for="">Annio de Creacion</label>
+  <label for="">Genero Literario</label>
+</div>
+
+<div *ngFor="let book of books; let i = index" class="table-row">
+    <label for="">{{i+1}}</label>
+    <label for="">{{book.name}}</label>
+    <label for="">{{book.year}}</label>
+    <label for="">{{book.bookGenre}}</label>
+</div>

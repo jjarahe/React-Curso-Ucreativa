@@ -7,5 +7,6 @@ import { User } from './user.interface';
 export class UserService {
 
     public users: Array<User> = [];
+
   constructor() { }
 }

@@ -1,0 +1,20 @@
+<input type="text" placeholder="Nombre" [(ngModel)]="book.name">
+<br><br>
+<input type="number" placeholder="Annio de Creacion" [(ngModel)]="book.year">
+<br><br>
+<select [(ngModel)]="book.bookGenre" name="bookGenre">
+  <option value="" selected>Seleccione el Genero</option>
+  <option *ngFor="let genre of genres" [ngValue]="genre.name">
+      {{genre.name}}
+  </option>
+</select>
+<br><br>
+<select [(ngModel)]="index" *ngIf="authorsStored.length > 0" name="Authors">
+  <option value="" selected>Seleccione el Autor</option>
+  <option *ngFor="let author of authorsStored; let i = index;" [ngValue]="i">
+      {{author.name}}
+  </option>
+</select>
+<br><br>
+<button type="button" (click)="onSubmit()">Registrar Libro</button>
+<br><br>
