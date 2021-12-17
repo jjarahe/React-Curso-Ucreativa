@@ -23,7 +23,6 @@ export class LoginComponent implements OnInit {
   };
 
 
-
   public onSubmit(){
     this.userFound = this._userService.users.filter(obj => obj.username == this.user.username && obj.password == this.user.password)[0]
     if(this.userFound){
